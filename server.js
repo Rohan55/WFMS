@@ -42,7 +42,6 @@ mysql.createConnPool();
 
 //PopulateCache
 //cache.populateCache();
-
 app.listen(app.get('port'), function() {
     console.log('%s: Node server started on %d ...', Date(Date.now()), app.get('port'));
 });
