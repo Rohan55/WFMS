@@ -1,6 +1,6 @@
 var loginController = require('./controllers/login');
 var clientController = require('./controllers/client');
-
+var buildingController = require('./controllers/building');
 module.exports = function (app, passport) {
 
     // Home
@@ -14,13 +14,18 @@ module.exports = function (app, passport) {
     app.get('/api/loggedin',loginController.loggedin);
     app.post('/api/logout', loginController.logout);
     
-    // Clint
+    // Client
     app.get('/api/getClient/:idperson', ensureAuthenticated, clientController.getClient);
     app.get('/api/listAllClients', ensureAuthenticated, clientController.listAllClients);
     app.put('/api/updateClient', ensureAuthenticated, clientController.updateClient);
     app.post('/api/createClient', ensureAuthenticated, clientController.createClient);
     app.delete('/api/deleteClient', ensureAuthenticated, clientController.deleteClient);
    
+    //Building
+    app.post('/api/createBuilding', buildingController.createBuilding);
+    app.put('/api/editBuilding/:buildingid', buildingController.editBuilding);
+    app.delete('/api/deleteBuilding/:buildingid', buildingController.deleteBuilding);
+    
     //Elastick beanstalk healthcheck
     app.get('/health',function(req,res){ res.send(200); });
     
@@ -33,5 +38,5 @@ module.exports = function (app, passport) {
         	res.status(401).json({message : "Unauthorized access !!"}); 
 
         }
-    }
+       }
 };
