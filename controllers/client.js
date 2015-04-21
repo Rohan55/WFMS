@@ -33,7 +33,7 @@ updateClient = function(req,res){
 	}else{
 		var newParam ={
 				start_date : moment(req.body.start_date,'DD-MM-YYYY').toDate(),
-				end_date : moment(req.body.end_date,'DD-MM-YYYY').toDate(),
+				end_date : moment(req.body.end_date,'DD-MM-YYYY').toDate()
 		};
 		//and ?? = ? and ?? = ?
 		//'start_date',old.start_date,'end_date',old.end_date
@@ -54,7 +54,7 @@ getClient=function(req,res){
 	
 	if(!req.params.idperson){
 		res.status(400).json({ status : 400, message : "Bad Request" });
-	}else{
+	}else{ 
 		mysql.queryDb('SELECT * FROM client WHERE ?',[{idperson:req.params.idperson}],function(err,rows){
 
 			if (err) {
