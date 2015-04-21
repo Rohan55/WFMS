@@ -30,7 +30,7 @@ module.exports = function (app, passport) {
             return next(); 
         } else {
             //res.redirect('/login');
-           // res.status(401).json({message : "Unauthorized access !!"}); 
+            res.status(402).json({message : "Unauthorized access !!"}); 
         }
     }
 };
