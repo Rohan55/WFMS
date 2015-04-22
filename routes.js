@@ -1,6 +1,9 @@
 var loginController = require('./controllers/login');
 var clientController = require('./controllers/client');
+
 var adminController = require('./controllers/admin');
+
+var buildingController = require('./controllers/building');
 
 module.exports = function (app, passport) {
 
@@ -25,8 +28,13 @@ module.exports = function (app, passport) {
     // Admin
     app.post('/api/createAlert' ,adminController.createAlert);
     app.post('/api/publishAlert',adminController.publishAlert);
-    app.get('/api/alertByBuilding',adminController.alertByBuilding);
-   
+    app.post('/api/addPatrolRecord',adminController.addPatrolRecord );
+    
+    //Building
+    app.post('/api/createBuilding', buildingController.createBuilding);
+    app.put('/api/editBuilding/:buildingid', buildingController.editBuilding);
+    app.delete('/api/deleteBuilding/:buildingid', buildingController.deleteBuilding);
+    
     //Elastick beanstalk healthcheck
     app.get('/health',function(req,res){ res.send(200); });
     
@@ -37,11 +45,8 @@ module.exports = function (app, passport) {
             return next(); 
         } else {
             //res.redirect('/login');
-
-          
-
-           res.status(401).json({message : "Unauthorized access !!"}); 
+        	res.status(401).json({message : "Unauthorized access !!"}); 
 
         }
-    }
+       }
 };

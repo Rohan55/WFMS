@@ -27,7 +27,7 @@ createAlert = function(req,res){
 
 publishAlert = function(req,res){
 	console.log(JSON.stringify(req.body));
-	if(!req.body.idguard || !req.body.idalert || !req.severity || !req.body.time){
+	if(!req.body.idguard || !req.body.idalert || !req.severity || !req.body.date){
 		res.status(400).json({status : 400, message : "Bad Request"});
 	}else{
 		
@@ -35,11 +35,11 @@ publishAlert = function(req,res){
 				idguard : req.body.idguard,
 				idalert : req.body.idalert,
 				severity : req.body.severity,
-				time : req.body.time
+				date : req.body.date
 				
 		}
 
-		mysql.queryDb("INSERT INTO alertIndex SET ?", queryParam, function(err, response) {
+		mysql.queryDb("INSERT INTO alertinfo SET ?", queryParam, function(err, response) {
 			if (err) {
 				console.log("Error while perfoming query !!!");
 				res.status(500).json({ status : 500, message : "Please try again later" });
@@ -51,7 +51,7 @@ publishAlert = function(req,res){
 };
 
 
-alertByBuilding = function(req,res){
+/*alertByBuilding = function(req,res){
 	console.log(JSON.stringify(req.body));
 	if(!req.body.idalert || !req.body.heading || !req.body.description ){
 		res.status(400).json({status : 400, message : "Bad Request"});
@@ -73,6 +73,36 @@ alertByBuilding = function(req,res){
 			}
 		});
 	}
+};*/
+
+addPatrolRecord = function(req,res){
+	console.log(JSON.stringify(req.body));
+	if(!req.body.date || !req.body.description|| !req.body.idgaurd || !req.body.idbuilding || !req.body.idreport){
+		
+		res.status(400).json({status : 400, message : "Bad Request"});
+	}else{
+		
+		var queryParam = {
+				date    : req.body.date,
+				description : req.body.description,
+				idgaurd   : req.body.idgaurd,
+				idbuilding : req.body.idgaurd,
+				idreport : req.body.idreport
+				
+				
+		}
+
+		mysql.queryDb("INSERT INTO patrol SET ?", queryParam, function(err, response) {
+			if (err) {
+				console.log("Error while perfoming query !!!");
+				res.status(500).json({ status : 500, message : "Please try again later" });
+			} else {
+				res.status(200).json({ status : 200, message : "Patrol record has been added Succesfully" });
+			}
+		});
+	}
 };
+
 exports.createAlert=createAlert;
 exports.publishAlert=publishAlert;
+exports.addPatrolRecord=addPatrolRecord;
