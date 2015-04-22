@@ -1,5 +1,7 @@
 var loginController = require('./controllers/login');
 var clientController = require('./controllers/client');
+var guardController = require('./controllers/guard');
+
 
 module.exports = function (app, passport) {
 
@@ -21,6 +23,15 @@ module.exports = function (app, passport) {
     app.post('/api/createClient', ensureAuthenticated, clientController.createClient);
     app.delete('/api/deleteClient', ensureAuthenticated, clientController.deleteClient);
    
+    
+    //Guard
+    app.post('/api/createGuard', ensureAuthenticated, guardController.createGuard);
+    app.put('/api/updateGuard/:idguard', ensureAuthenticated, guardController.updateGuard);
+    app.get('/api/listAllGuards', ensureAuthenticated, guardController.listAllGuards);
+    app.delete('/api/deleteGuard/:idguard', ensureAuthenticated, guardController.deleteGuard);
+    app.get('/api/getGuard/:idguard', ensureAuthenticated, guardController.getGuard);
+   
+    
     //Elastick beanstalk healthcheck
     app.get('/health',function(req,res){ res.send(200); });
     
