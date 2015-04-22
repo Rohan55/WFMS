@@ -114,14 +114,28 @@ getGuard=function(req,res){
 };
 
 
+//Will use filter in angular on these names returned
+
+searchGuard=function(req,res){
+	mysql.queryDb('select concat(?? , " " , ??) as name, ?? from person left outer join login on ?? = ?? where login.type= "Guard"',['person.fname','person.lname','person.email','person.idperson','login.idperson','Guard'],function(err,rows){
+		if (err) {
+			console.log("Error while listing all the guard details !!!"  + err);
+			res.status(500).json({ status : 500, message : "Error while listing guard details !!!" });
+		} else {
+			res.status(200).json({ status : 200, data : rows});
+		}
+	});
+};
 
 
+
+	
 
 exports.createGuard = createGuard;
 exports.updateGuard=updateGuard;
 exports.listAllGuards=listAllGuards;
 exports.deleteGuard=deleteGuard;
 exports.getGuard = getGuard;
-
+exports.searchGuard=searchGuard
 
 

@@ -35,7 +35,9 @@ module.exports = function (app, passport) {
     app.get('/api/listAllGuards', ensureAuthenticated, guardController.listAllGuards);
     app.delete('/api/deleteGuard/:idguard', ensureAuthenticated, guardController.deleteGuard);
     app.get('/api/getGuard/:idguard', ensureAuthenticated, guardController.getGuard);
-
+    app.get('/api/searchGuard',ensureAuthenticated, guardController.searchGuard);
+    
+    
     //Building
     app.post('/api/createBuilding', buildingController.createBuilding);
     app.put('/api/editBuilding/:buildingid', buildingController.editBuilding);
