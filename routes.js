@@ -1,12 +1,12 @@
 var loginController = require('./controllers/login');
 var clientController = require('./controllers/client');
-<<<<<<< HEAD
+
 var guardController = require('./controllers/guard');
 
 
-=======
+
 var buildingController = require('./controllers/building');
->>>>>>> d08d7b31e591aff9bcb65345a2083d1728c6451e
+
 module.exports = function (app, passport) {
 
     // Home
