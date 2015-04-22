@@ -3,6 +3,12 @@ var clientController = require('./controllers/client');
 var reportController = require('./controllers/report');
 var alertController = require('./controllers/alert');
 
+var guardController = require('./controllers/guard');
+
+
+
+var buildingController = require('./controllers/building');
+
 module.exports = function (app, passport) {
 
     // Home
@@ -16,7 +22,7 @@ module.exports = function (app, passport) {
     app.get('/api/loggedin',loginController.loggedin);
     app.post('/api/logout', loginController.logout);
     
-    // Clint
+    // Client
     app.get('/api/getClient/:idperson', ensureAuthenticated, clientController.getClient);
     app.get('/api/listAllClients', ensureAuthenticated, clientController.listAllClients);
     app.put('/api/updateClient', ensureAuthenticated, clientController.updateClient);
@@ -35,6 +41,23 @@ module.exports = function (app, passport) {
     app.get('/api/alertPerDay/:date', ensureAuthenticated, alertController.alertPerDay);
 
    
+
+    
+    //Guard
+    app.post('/api/createGuard', ensureAuthenticated, guardController.createGuard);
+    app.put('/api/updateGuard/:idguard', ensureAuthenticated, guardController.updateGuard);
+    app.get('/api/listAllGuards', ensureAuthenticated, guardController.listAllGuards);
+    app.delete('/api/deleteGuard/:idguard', ensureAuthenticated, guardController.deleteGuard);
+    app.get('/api/getGuard/:idguard', ensureAuthenticated, guardController.getGuard);
+    app.get('/api/searchGuard',ensureAuthenticated, guardController.searchGuard);
+    
+    
+    //Building
+    app.post('/api/createBuilding', buildingController.createBuilding);
+    app.put('/api/editBuilding/:buildingid', buildingController.editBuilding);
+    app.delete('/api/deleteBuilding/:buildingid', buildingController.deleteBuilding);
+
+    
     //Elastick beanstalk healthcheck
     app.get('/health',function(req,res){ res.send(200); });
     
@@ -43,10 +66,17 @@ module.exports = function (app, passport) {
        // if (req.isAuthenticated()) 
     	{ 
             return next(); 
+
             //Rishabh Sanghvi
 //        } else {
 //            //res.redirect('/login');
 //           res.status(401).json({message : "Unauthorized access !!"}); 
+
+    //   } else {
+            //res.redirect('/login');
+      //  	res.status(401).json({message : "Unauthorized access !!"}); 
+
+
         }
-    }
+       }
 };
