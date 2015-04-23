@@ -2,6 +2,76 @@ var dateutil = require('../util/dateutil'),
 	moment = require('moment');
 
 createReport = function(req,res){
+	console.log(JSON.stringify(req.body));
+	console.log("This API will be returning Report Id for the corresponding guard and building id");
+	if(!req.body.idguard || !req.body.idbuilding){
+		res.status(400).json({status : 400, message : "Bad Request"});
+	}else{
+		//var date = new Date();
+		
+		//var date = moment(new Date(),myString());
+		//var date = moment(new Date(),'YYYY-MM-DD');
+		
+		var date = moment().format('YYYY-MM-DD');
+		console.log(date);
+
+		var queryParam = {
+				date : date,
+				idguard:req.body.idguard,
+				idbuilding:req.body.idbuilding
+		}
+
+		mysql.queryDb("SELECT * FROM wfms.report where ?? = ? AND ?? = ? AND ?? = ?;",['idbuilding',req.body.idbuilding,'idguard',req.body.idguard,'date',date], function(err, result) {
+			if (err) {
+				console.log("Error while perfoming query !!!");
+				res.status(500).json({ status : 500, message : "Please try again later" });
+			} else if(result[0]){
+				
+				res.status(200).json({ status : 200, message : "Report already exsist, sending report id for reference",idreport:result[0].idreport});
+			} else{
+
+				mysql.queryDb("INSERT INTO wfms.report SET ?", queryParam, function(err, result) {
+					if (err) {
+						console.log("Error while perfoming query !!!");
+						res.status(500).json({ status : 500, message : "Please try again later" });
+					} else {
+						res.status(200).json({ status : 200, message : "New report is been created", idreport:result.insertId });
+					}
+				});
+				
+			}
+				
+		});
+	}
+	
+}
+
+reportPerGuard = function(req,res) {
+	console.log(JSON.stringify(req.body));
+	console.log("This Api will be for fetching alerts and patrols per gaurd");
+	console.log(req.params.idguard);
+	if(!req.params.idguard){
+		res.status(400).json({status : 400, message : "Bad Request"});
+	} else {
+		mysql.queryDb("SELECT * FROM wfms.patrol where ?? = ?",['idguard',req.params.idguard], function(err, resultPatrol) {
+			if (err) {
+				console.log("Error while perfoming query !!!");
+				res.status(500).json({ status : 500, message : "Please try again later" });
+			} else {
+				mysql.queryDb("SELECT * FROM wfms.alertinfo where ?? = ?",['idguard',req.params.idguard], function(err, resultAlert) {
+					if (err) {
+						console.log("Error while perfoming query !!!");
+						res.status(500).json({ status : 500, message : "Please try again later" });
+					} else {
+						
+						res.status(200).json({ status : 200, message : "Report per gaurd", resultAlert:resultAlert, resultPatrol:resultPatrol});
+					}	
+				});
+				
+				
+			}	
+		});
+	}
 	
 console.log(JSON.stringify(req.body));
 
@@ -117,7 +187,7 @@ reportPerDay = function(req,res){
 	
 }
 
-
+exports.reportPerGuard = reportPerGuard;
 exports.reportPerDay = reportPerDay;
 exports.reportPerClient = reportPerClient;
 exports.reportPerBuilding = reportPerBuilding;
