@@ -2,8 +2,8 @@
 var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider.when('/', {
-		templateUrl : 'templates/login.ejs',
-		controller : 'LoginController'
+		templateUrl : 'templates/client.ejs',
+		controller : 'ClientController'
 	}).otherwise({
 		redirectTo : '/'
 	});
