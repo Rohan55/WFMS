@@ -5,14 +5,11 @@ wfms.controller("AdminController", function($scope, $rootScope,
 	$scope.template = "templates/admin/adminhome.html";
 
 	$scope.setTemplate = function(tabName){
-		//$scope.selectedInput = "";
-		//$scope.showTabData = true;
 		$scope.template = "templates/admin/"+tabName + ".html";
 	}
 
 	$scope.getTemplate = function(){
 		return $scope.template;
-		//return $scope.templateView;
 	};
 
 	
