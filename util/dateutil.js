@@ -14,3 +14,10 @@ exports.nowString = function(){
 	//return new Date().toISOString().slice(0, 19).replace('T', ' ');
 	return moment().format('MMMM-YYYY');
 };
+
+
+
+exports.myString = function(){
+	//return new Date().toISOString().slice(0, 19).replace('T', ' ');
+	return moment().format('YYYY-MM-DD');
+};
