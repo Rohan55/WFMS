@@ -35,6 +35,8 @@ module.exports = function (app, passport) {
     app.get('/api/reportPerBuilding/:idbuilding', ensureAuthenticated, reportController.reportPerBuilding);
     app.get('/api/reportPerClient/:idclient', ensureAuthenticated, reportController.reportPerClient);
     app.get('/api/reportPerDay/:date', ensureAuthenticated, reportController.reportPerDay);
+    app.get('/api/reportPerGuard/:idguard', ensureAuthenticated, reportController.reportPerGuard);
+    
     app.post('/api/createAlert', ensureAuthenticated, alertController.createAlert);
     app.get('/api/alertPerBuilding/:idbuilding', ensureAuthenticated, alertController.alertPerBuilding);
     app.get('/api/alertPerClient/:idclient', ensureAuthenticated, alertController.alertPerClient);
