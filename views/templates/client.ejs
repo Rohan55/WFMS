@@ -1,4 +1,4 @@
-<div ng-controller="LoginController">
+<div ng-controller = "clientController">
 <!-- container section start -->
   <section id="container" class="">
      
@@ -8,7 +8,7 @@
             </div>
 
             <!--logo start-->
-            <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+            <a href="#" class="logo">WFMS</a>
             <!--logo end-->
 
             <div class="nav search-row" id="top_menu">
@@ -30,9 +30,9 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="img/avatar1_small.jpg">
+                                <img alt="" src="img/India.png">
                             </span>
-                            <span class="username">Jenifer Smith</span>
+                            <span class="username" ng-model="clientName">{{clientName}}</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
