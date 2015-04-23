@@ -1,4 +1,4 @@
-myLinkedIn.service('DataService', function($http) {
+wfms.service('DataService', function($http) {
 
 	this.getData = function(dataURI, params) {
 		return $http({
