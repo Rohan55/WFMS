@@ -278,7 +278,7 @@ ul.sidebar-menu {
 }
 
 #sidebar > ul > li > ul.sub {
-    display: none;
+    display: block;
 }
 
 #sidebar > ul > li.active > ul.sub, #sidebar > ul > li > ul.sub > li > a {
