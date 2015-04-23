@@ -16,6 +16,7 @@ module.exports = function (app, passport) {
     // Home
     app.get('/', function(req,res){ res.render("index"); });
     app.get(['/home','/logout'], ensureAuthenticated, function(req,res){ res.render("index"); });
+   // app.get('/guard', function(req,res){ res.render("guard"); });
 
     // Auth
     app.post('/api/register', loginController.register);

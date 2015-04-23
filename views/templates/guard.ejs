@@ -1,4 +1,4 @@
-<div ng-controller="LoginController">
+<div ng-controller="GuardController">
 <!-- container section start -->
   <section id="container" class="">
      
@@ -8,7 +8,7 @@
             </div>
 
             <!--logo start-->
-            <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+            <a href="index.html" class="logo">Guard <span class="lite"></span></a>
             <!--logo end-->
 
             <div class="nav search-row" id="top_menu">
@@ -32,7 +32,7 @@
                             <span class="profile-ava">
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
-                            <span class="username">Jenifer Smith</span>
+                            <span class="username"></span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -67,8 +67,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="form_component.html">Form Elements</a></li>                          
-                          <li><a class="" href="form_validation.html">Form Validation</a></li>
+                          <li><a href="" ng-click="getTemplate('createReport')">Create Alert</a></li>                          
+                          <li><a class="" href="form_validation.html">Create Patrol</a></li>
                       </ul>
                   </li>       
                   <li class="sub-menu">
@@ -78,9 +78,9 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="general.html">Elements</a></li>
-                          <li><a class="" href="buttons.html">Buttons</a></li>
-                          <li><a class="" href="grids.html">Grids</a></li>
+                          <li><a class="" href="general.html">View My Schedule</a></li>
+                          <li><a class="" href="buttons.html"></a></li>
+                          <li><a class="" href="grids.html"></a></li>
                       </ul>
                   </li>
                   <li>
@@ -130,8 +130,9 @@
       <!--sidebar end-->
       
       <!--main content start-->
-      <div ng-include="getTemplate()"></div>
-      <!--main content end-->
+     	<div ng-include="getTemplate('guardframe')"></div>
+		
+	
   </section>
   <!-- container section start -->
   </div>
