@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var cookieSession = require('cookie-session');
+var path = require('path');
 var mysql = require('./models/mysql');
 
 var app = express();
@@ -24,7 +25,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.engine('html', ejs.renderFile);
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname , 'views'));
 
 //Authentication
 require('./util/auth')(passport);
