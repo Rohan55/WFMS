@@ -63,6 +63,11 @@ module.exports = function (app, passport) {
     //Elastick beanstalk healthcheck
     app.get('/health',function(req,res){ res.send(200); });
     
+    app.get('/templates/:file',function(req,res){
+        var file = req.params.file;
+        res.render('templates/' + file);
+    });
+
     //Auth Middleware
     function ensureAuthenticated(req, res, next) {
        // if (req.isAuthenticated()) 
