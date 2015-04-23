@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="LoginController">
 <!-- container section start -->
   <section id="container" class="">
      
@@ -130,17 +130,7 @@
       <!--sidebar end-->
       
       <!--main content start-->
-      <section id="main-content">
-          <section class="wrapper">            
-              
-      <div class="row"></div>
-              
-            <div class="row"></div>
-  
-            <div class="row"></div>  
-
-          </section>
-      </section>
+      <div ng-include="getTemplate()"></div>
       <!--main content end-->
   </section>
   <!-- container section start -->

@@ -1,6 +1,11 @@
 'use strict';
 wfms.controller("LoginController", function($scope, $rootScope,
 		$location, $window, DataService) {
+
+	$scope.template = "templates/wfms.html";
+	$scope.getTemplate = function(){
+		return $scope.template;
+	};
 	// $scope.signInFormError = "";
 
 	// $scope.signIn = function() {
