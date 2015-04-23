@@ -1,11 +1,13 @@
 var loginController = require('./controllers/login');
 var clientController = require('./controllers/client');
+
+
+var adminController = require('./controllers/admin');
+
 var reportController = require('./controllers/report');
 var alertController = require('./controllers/alert');
 
 var guardController = require('./controllers/guard');
-
-
 
 var buildingController = require('./controllers/building');
 
@@ -29,6 +31,13 @@ module.exports = function (app, passport) {
     app.post('/api/createClient', ensureAuthenticated, clientController.createClient);
     app.delete('/api/deleteClient', ensureAuthenticated, clientController.deleteClient);
     
+
+    // Admin
+    app.post('/api/createAlert' ,adminController.createAlert);
+    app.post('/api/publishAlert',adminController.publishAlert);
+    app.post('/api/addPatrolRecord',adminController.addPatrolRecord );
+    app.put('/api/createReport',reportController.createReport);
+
     
     //Rishabh
     app.post('/api/createReport', ensureAuthenticated, reportController.createReport);
@@ -41,6 +50,7 @@ module.exports = function (app, passport) {
     app.get('/api/alertPerBuilding/:idbuilding', ensureAuthenticated, alertController.alertPerBuilding);
     app.get('/api/alertPerClient/:idclient', ensureAuthenticated, alertController.alertPerClient);
     app.get('/api/alertPerDay/:date', ensureAuthenticated, alertController.alertPerDay);
+   
 
    
 
@@ -53,6 +63,7 @@ module.exports = function (app, passport) {
     app.get('/api/getGuard/:idguard', ensureAuthenticated, guardController.getGuard);
     app.get('/api/searchGuard',ensureAuthenticated, guardController.searchGuard);
     
+
     
     //Building
     app.post('/api/createBuilding', buildingController.createBuilding);
@@ -69,6 +80,7 @@ module.exports = function (app, passport) {
     });
 
     //Auth Middleware
+    
     function ensureAuthenticated(req, res, next) {
        // if (req.isAuthenticated()) 
     	{ 
