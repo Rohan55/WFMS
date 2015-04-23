@@ -28,7 +28,7 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 .run(['$rootScope','$window' ,'$location', 'DataService',function($rootScope,$window, $location,DataService) {
 	$rootScope.$on('$routeChangeStart', function(event) {
 
-		DataService.postData(urlConstants.IS_LOGGED_IN,[]).success(function(response){
+		/*DataService.postData(urlConstants.IS_LOGGED_IN,[]).success(function(response){
 
 			if($window.sessionStorage.userId){
 				$rootScope.userId = $window.sessionStorage.userId;
@@ -58,7 +58,7 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 				$location.path('/');
 			}
 		});
-
+*/
 		
 	});
 

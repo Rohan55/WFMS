@@ -2,8 +2,10 @@
 wfms.controller("ClientController", function($scope, $rootScope,
 		$location, $window, DataService) {
 
-	$scope.template = "templates/wfms.html";
-	$scope.getTemplate = function(){
+	$scope.template = "";
+	$scope.getTemplate = function(a){
+		console.log(a);
+		$scope.template = "templates/"+a+".html";
 		return $scope.template;
 	};
 	// $scope.signInFormError = "";
