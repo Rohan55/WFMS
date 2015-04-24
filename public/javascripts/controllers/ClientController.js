@@ -1,21 +1,14 @@
 'use strict';
-wfms.controller("GuardController", function($scope, $rootScope,$modal,
+wfms.controller("ClientController", function($scope, $rootScope,
 		$location, $window, DataService) {
 
-	//$scope.template = "templates/guardframe.html";
-	$scope.template = "templates/guardframe.html";
-
-	$scope.setTemplate = function(tabName){
-		$scope.template = "templates/"+tabName + ".html";
-	}
-
+	$scope.template = "templates/wfms.html";
 	$scope.getTemplate = function(){
 		return $scope.template;
 	};
-
 	// $scope.signInFormError = "";
 
-	// $scope.signIn = function() {   
+	// $scope.signIn = function() {
 	// 	if ($scope.loginForm.email.$invalid || $scope.loginForm.pwd.$invalid) {
 	// 		$scope.signInFormError = "Invalid Credentials";
 	// 	} else {
@@ -42,13 +35,4 @@ wfms.controller("GuardController", function($scope, $rootScope,$modal,
 	// 		});
 	// 	}
 	// }
-	
-	/*
-	$scope.tabActive = function(tabName){
-		$scope.selectedInput = "";
-		$scope.showTabData = true;
-		$scope.templateView = "templates/"+tabName + ".html";
-	}*/
-	
-	
 });

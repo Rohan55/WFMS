@@ -4,6 +4,7 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 	$routeProvider.when('/', {
 		templateUrl : 'templates/login.ejs',
 		controller : 'LoginController'
+
 	}).when('/guard', {
 		templateUrl : 'templates/guard.ejs',
 		controller : 'GuardController'
@@ -11,6 +12,7 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 		templateUrl : 'templates/client.ejs',
 		controller : 'ClientController'
 		}).when('/admin', {
+
 		templateUrl : 'templates/admin.ejs',
 		controller : 'AdminController'
 	}).otherwise({
