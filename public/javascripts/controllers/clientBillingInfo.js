@@ -1,5 +1,5 @@
 'use strict';
-wfms.controller("ClientController", function($scope, $rootScope,
+wfms.controller("clientBillingInfo", function($scope, $rootScope,
 		$location, $window, DataService) {
 
 	// $scope.template = "templates/wfms.html";
