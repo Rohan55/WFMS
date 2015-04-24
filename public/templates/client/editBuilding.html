@@ -11,39 +11,22 @@
 						<strong>Name</strong>
 					</h5>
 				</div>
-				<div class="col-xs-5 col-xs-pull-1">
-					<input type="text" name="firstName" ng-model="buildingName"
+				<div class="col-xs-9 col-xs-pull-1">
+					<input type="text" name="firstName" ng-model="buildingname"
 						class="form-control" placeholder="Building Name" required>
 				</div>
-				<div class="col-xs-5 col-xs-pull-1">
-					<input type="text" name="lastName" ng-model="lastName"
-						class="form-control" placeholder="Last Name" required>
-				</div>
+				
 			</div>
 		</div>
 		<div class="row" style="padding-top: 2%;">
-			<div class="col-xs-6">
+		
+			<div class="col-xs-12">
 				<div class="col-xs-2">
-					<h5>
-						<strong>CheckPoint</strong>
-					</h5>
-				</div>
-				<div class="col-xs-4">
-					<div class="form-group">
-						<select class="form-control" ng-model="checkpoint" required>
-							<option default>Male</option>
-							<option>Female</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-xs-pull-2">
-				<div class="col-xs-1">
 					<h5>
 						<strong>Release Date</strong>
 					</h5>
 				</div>
-				<div class="col-xs-7">
+				<div class="col-xs-9 col-xs-pull-1">
 					<p class="input-group">
 						<input type="text" class="form-control"
 							datepicker-popup="dd-MMMM-yyyy" ng-model="release_date" is-open="opened"
@@ -60,6 +43,18 @@
 				</div>
 			</div>
 		</div>
+		
+			<div class="row" style="padding-top: 2%;">
+			<div class="col-xs-2" style="margin-left: 2%;">
+				<h5>
+					<strong>CheckPoints</strong>
+				</h5>
+			</div>
+			<div class="col-xs-9 col-xs-pull-1">
+				<textarea class="form-control" rows="2" ng-model="checkpoint"></textarea>
+			</div>
+		</div>
+		
 		<div class="row" style="padding-top: 2%;">
 			<div class="col-xs-2" style="margin-left: 2%;">
 				<h5>

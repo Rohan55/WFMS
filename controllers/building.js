@@ -11,8 +11,9 @@ createBuilding = function(req,res){
 		var releaseDate = moment(req.body.release_date,'DD-MM-YYYY').toDate();
 		
 		var queryParam = {
-				release_date : releaseDate,
 				idclient : req.body.idclient,
+				buildingname: req.body.buildingname,
+				release_date : req.body.releaseDate,
 				address : req.body.address,
 				service_fees : req.body.service_fees,
 				checkpoint : req.body.checkpoint
