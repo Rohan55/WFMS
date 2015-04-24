@@ -4,11 +4,22 @@ var dateutil = require('../util/dateutil'),
 createAlert = function(req,res){
 	console.log(JSON.stringify(req.body));
 	console.log("This Api will be adding the alert");
-	console.log(req.params.idbuilding);
-	if(!req.params.idbuilding){
+	console.log(req.body.idbuilding);
+	if(!req.body.idbuilding || !req.body.idreport || !req.body.severity || !req.body.date || !req.body.idguard){
 		res.status(400).json({status : 400, message : "Bad Request"});
-	} else {
-		mysql.queryDb('SELECT wfms.alertinfo.severity, wfms.alertinfo.date, wfms.alertinfo.idalertInfo FROM wfms.alertinfo where ?? = ?;',['idbuilding',req.params.idbuilding],function(err,resultAlert){
+	 } else {
+
+		var queryParam = {
+				idbuilding : req.body.idbuilding,
+				idreport : req.body.idreport,
+				severity : req.body.severity,
+				date : req.body.date,
+				idguard : req.body.idguard,
+				status : 'F',
+				seenByClient : 'F'
+		}
+
+		mysql.queryDb("INSERT INTO `wfms`.`alertinfo` SET ?", queryParam,function(err,resultAlert){
 			if (err) {
 				res.status(500).json({ status : 500, message : "Error while retrieving data" });
 			} else {
@@ -81,9 +92,20 @@ alertPerDay = function(req,res){
 	
 }
 
+activeAdminAlerts= function(req,res){
+	mysql.queryDb('select * from alertinfo where status="F" ',function(err,rows){
+		if (err) {
+			console.log("Error while listing all the guard details !!!"  + err);
+			res.status(500).json({ status : 500, message : "Error while listing guard details !!!" });
+		} else {
+			res.status(200).json({ status : 200, data : rows});
+		}
+	});
+};
+
 
 exports.alertPerDay = alertPerDay;
 exports.alertPerClient = alertPerClient;
 exports.alertPerBuilding = alertPerBuilding
 exports.createAlert = createAlert;
-
+exports.activeAdminAlerts = activeAdminAlerts;
