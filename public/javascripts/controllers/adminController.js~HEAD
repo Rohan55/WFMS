@@ -1,11 +1,18 @@
 'use strict';
-wfms.controller("ClientController", function($scope, $rootScope,
+wfms.controller("AdminController", function($scope, $rootScope,
 		$location, $window, DataService) {
 
-	$scope.template = "templates/wfms.html";
+	$scope.template = "templates/admin/adminhome.html";
+
+	$scope.setTemplate = function(tabName){
+		$scope.template = "templates/admin/"+tabName + ".html";
+	}
+	
 	$scope.getTemplate = function(){
 		return $scope.template;
 	};
+	
+	
 	// $scope.signInFormError = "";
 
 	// $scope.signIn = function() {

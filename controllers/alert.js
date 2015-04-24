@@ -5,10 +5,21 @@ createAlert = function(req,res){
 	console.log(JSON.stringify(req.body));
 	console.log("This Api will be adding the alert");
 	console.log(req.params.idbuilding);
-	if(!req.params.idbuilding){
+	if(!req.body.idbuilding || !req.body.idreport || !req.body.severity || !req.body.date || req.body.idguard){
 		res.status(400).json({status : 400, message : "Bad Request"});
 	} else {
-		mysql.queryDb('SELECT wfms.alertinfo.severity, wfms.alertinfo.date, wfms.alertinfo.idalertInfo FROM wfms.alertinfo where ?? = ?;',['idbuilding',req.params.idbuilding],function(err,resultAlert){
+
+		var queryParam = {
+				idbuilding : req.body.idbuilding,
+				idreport : req.body.idreport,
+				severity : req.body.severity,
+				date : req.body.date,
+				idguard : req.body.idguard
+				status : 'F',
+				seenByClient : 'F'
+		}
+
+		mysql.queryDb("INSERT INTO `wfms`.`alertinfo` SET ?", queryParam,function(err,resultAlert){
 			if (err) {
 				res.status(500).json({ status : 500, message : "Error while retrieving data" });
 			} else {
