@@ -4,17 +4,17 @@ var dateutil = require('../util/dateutil'),
 createAlert = function(req,res){
 	console.log(JSON.stringify(req.body));
 	console.log("This Api will be adding the alert");
-	console.log(req.params.idbuilding);
-	if(!req.body.idbuilding || !req.body.idreport || !req.body.severity || !req.body.date || req.body.idguard){
+	console.log(req.body.idbuilding);
+	if(!req.body.idbuilding || !req.body.idreport || !req.body.severity || !req.body.date || !req.body.idguard){
 		res.status(400).json({status : 400, message : "Bad Request"});
-	} else {
+	 } else {
 
 		var queryParam = {
 				idbuilding : req.body.idbuilding,
 				idreport : req.body.idreport,
 				severity : req.body.severity,
 				date : req.body.date,
-				idguard : req.body.idguard
+				idguard : req.body.idguard,
 				status : 'F',
 				seenByClient : 'F'
 		}
