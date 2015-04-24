@@ -3,6 +3,16 @@ wfms.controller("ClientController", function($scope, $rootScope,
 		$location, $window, DataService) {
 
 	$scope.template = "templates/wfms.html";
+	$scope.getTemplate = function(a){
+
+		return $scope.template;
+	};
+	$scope.template = "templates/client/adminhome.html";
+
+	$scope.setTemplate = function(tabName){
+		$scope.template = "templates/admin/"+tabName + ".html";
+	}
+
 	$scope.getTemplate = function(){
 		return $scope.template;
 	};
