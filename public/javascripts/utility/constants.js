@@ -32,7 +32,8 @@ var urlConstants = {
 	"DELETE_EDUCATION" : "/api/user/education/",
 	"DELETE_EMPLOYMENT" : "/api/user/experience/",
 	"GET_ALL_GUARDS" : "/api/listAllGuards",
-	"DELETE_GUARD":"/api/deleteGuard"
+	"DELETE_GUARD":"/api/deleteGuard",
+	"GET_ACTIVE_ADMIN_ALERTS":"/api/activeAdminAlerts"
 };
 
 /**

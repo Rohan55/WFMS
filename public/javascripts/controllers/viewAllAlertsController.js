@@ -1,21 +1,21 @@
 'use strict';
-wfms.controller("ViewAllGuardsCtrl", function($scope, $rootScope, DataService) {
+wfms.controller("ViewAllAlertsCtrl", function($scope, $rootScope, DataService) {
 
-	$scope.getAllGaurds = function(){
+	$scope.getAllAlerts = function(){
 		console.log("function called");
-		var uri = urlConstants.GET_ALL_GUARDS;
+		var uri = urlConstants.GET_ACTIVE_ADMIN_ALERTS;
 		
 		DataService.getData(uri,[]).success(function(response){
 			if(response.data){
-				/*console.log(JSON.stringify(response.data));*/
-				$scope.guardListResults = response.data;
+				console.log(JSON.stringify(response.data));
+				$scope.activeAdminAlerts = response.data;
 			}
 		}).error(function(err){
 			console.log(err.message);
 		});
 	}
 	
-	$scope.deleteCall = function(guard){
+/*	$scope.deleteCall = function(guard){
 		
 		console.log("to delete"+guard.guard.fname);
 		
@@ -28,7 +28,7 @@ wfms.controller("ViewAllGuardsCtrl", function($scope, $rootScope, DataService) {
 			
 		});
 		this.getAllGaurds();
-	}
+	}*/
 	
 
 });

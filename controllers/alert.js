@@ -92,9 +92,20 @@ alertPerDay = function(req,res){
 	
 }
 
+activeAdminAlerts= function(req,res){
+	mysql.queryDb('select * from alertinfo where status="F" ',function(err,rows){
+		if (err) {
+			console.log("Error while listing all the guard details !!!"  + err);
+			res.status(500).json({ status : 500, message : "Error while listing guard details !!!" });
+		} else {
+			res.status(200).json({ status : 200, data : rows});
+		}
+	});
+};
+
 
 exports.alertPerDay = alertPerDay;
 exports.alertPerClient = alertPerClient;
 exports.alertPerBuilding = alertPerBuilding
 exports.createAlert = createAlert;
-
+exports.activeAdminAlerts = activeAdminAlerts;
