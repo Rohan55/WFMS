@@ -33,7 +33,7 @@ module.exports = function (app, passport) {
     
 
     // Admin
-    app.post('/api/createAlert' ,adminController.createAlert);
+    //app.post('/api/createAlert' ,adminController.createAlert);
     app.post('/api/publishAlert',adminController.publishAlert);
     app.post('/api/addPatrolRecord',adminController.addPatrolRecord );
     app.put('/api/createReport',reportController.createReport);
