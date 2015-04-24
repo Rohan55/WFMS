@@ -1,5 +1,5 @@
 'use strict';
-wfms.controller("clientBillingInfo", function($scope, $rootScope,
+wfms.controller("viewAlertClientController", function($scope, $rootScope,
 		$location, $window, DataService) {
 
 	
@@ -12,12 +12,13 @@ wfms.controller("clientBillingInfo", function($scope, $rootScope,
 	// $scope.getTemplate = function(){
 	// 	return $scope.template;
 	// };
-	$scope.buildingName = "Building 1";
+	
 
-	$scope.getBillingInfo = function(){
-		DataService.getData("/api/getClient/7", []).success(
+	$scope.getAlert = function(){
+		DataService.getData("/api/alertPerClient/1", []).success(
 				function(response) {
-					$scope.billingInfo = response.data;
+					console.log("Hi"+response.resultAlert);
+					$scope.alert = response.resultAlert;
 				}).error(function(err) {
 			console.log("Error while fetching data");
 		});

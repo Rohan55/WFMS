@@ -126,7 +126,7 @@ reportPerClient = function(req,res){
                         if (err) {
                                 res.status(500).json({ status : 500, message : "Error while retrieving data" });
                         } else {
-                                mysql.queryDb('SELECT wfms.alertinfo.severity, wfms.alertinfo.time, wfms.alertinfo.idalertInfo FROM wfms.patrol left outer join wfms.building on  ?? = ?? left outer join wfms.alertinfo on ?? = ?? where ?? = ?;',['wfms.patrol.idbuilding','wfms.building.idbuilding','wfms.alertinfo.idreport','wfms.patrol.idreport','idclient',req.params.idclient],function(err,resultAlert){
+                                mysql.queryDb('SELECT wfms.alertinfo.severity, wfms.alertinfo.date, wfms.alertinfo.idalertInfo FROM wfms.patrol left outer join wfms.building on  ?? = ?? left outer join wfms.alertinfo on ?? = ?? where ?? = ?;',['wfms.patrol.idbuilding','wfms.building.idbuilding','wfms.alertinfo.idreport','wfms.patrol.idreport','idclient',req.params.idclient],function(err,resultAlert){
                                         if (err) {
                                                 res.status(500).json({ status : 500, message : "Error while retrieving data" });
                                         } else {

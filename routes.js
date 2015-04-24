@@ -34,7 +34,7 @@ module.exports = function (app, passport) {
     
 
     // Admin
-    app.post('/api/createAlert' ,adminController.createAlert);
+    //app.post('/api/createAlert' ,adminController.createAlert);
     app.post('/api/publishAlert',adminController.publishAlert);
     app.post('/api/addPatrolRecord',adminController.addPatrolRecord );
     app.put('/api/createReport',reportController.createReport);
@@ -51,7 +51,8 @@ module.exports = function (app, passport) {
     app.get('/api/alertPerBuilding/:idbuilding', ensureAuthenticated, alertController.alertPerBuilding);
     app.get('/api/alertPerClient/:idclient', ensureAuthenticated, alertController.alertPerClient);
     app.get('/api/alertPerDay/:date', ensureAuthenticated, alertController.alertPerDay);
-   
+    app.get('/api/activeAdminAlerts', ensureAuthenticated, alertController.activeAdminAlerts);
+    
 
    
 
@@ -69,6 +70,7 @@ module.exports = function (app, passport) {
 
     
     //Building
+    app.get('/api/listBuilding/:idperson', buildingController.getBuilding);
     app.post('/api/createBuilding', buildingController.createBuilding);
     app.put('/api/editBuilding/:buildingid', buildingController.editBuilding);
     app.delete('/api/deleteBuilding/:buildingid', buildingController.deleteBuilding);
