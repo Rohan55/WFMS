@@ -79,6 +79,12 @@ module.exports = function (app, passport) {
         res.render('templates/' + file);
     });
 
+    //For Admin templates
+    app.get('/templates/admin/:file',function(req,res){
+        var file = req.params.file;
+        res.render('templates/admin/' + file);
+    });
+
     //Auth Middleware
     
     function ensureAuthenticated(req, res, next) {
