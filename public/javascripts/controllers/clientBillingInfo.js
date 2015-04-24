@@ -2,19 +2,27 @@
 wfms.controller("clientBillingInfo", function($scope, $rootScope,
 		$location, $window, DataService) {
 
-	// $scope.template = "templates/wfms.html";
-	// $scope.getTemplate = function(a){
+	
+	// $scope.template = "templates/client/clientHome.html";
 
+	// $scope.setTemplate = function(tabName){
+	// 	$scope.template = "templates/client/"+tabName + ".html";
+	// }
+
+	// $scope.getTemplate = function(){
 	// 	return $scope.template;
 	// };
-	$scope.template = "templates/client/clientHome.html";
+	$scope.buildingName = "Building 1";
 
-	$scope.setTemplate = function(tabName){
-		$scope.template = "templates/client/"+tabName + ".html";
-	}
+	$scope.getBillingInfo = function(){
+		DataService.getData("/api/getClient/7", []).success(
+				function(response) {
+					$scope.billingInfo = response.data;
+				}).error(function(err) {
+			console.log("Error while fetching data");
+		});
 
-	$scope.getTemplate = function(){
-		return $scope.template;
+
 	};
 	// $scope.signInFormError = "";
 
