@@ -30,7 +30,9 @@ var urlConstants = {
 	"REJECT_CONNECTION_REQUEST" : "/api/user/connection/reject",
 	"GET_ALL_CONNECTIONS" : "/api/user/connection/",
 	"DELETE_EDUCATION" : "/api/user/education/",
-	"DELETE_EMPLOYMENT" : "/api/user/experience/"
+	"DELETE_EMPLOYMENT" : "/api/user/experience/",
+	"GET_ALL_GUARDS" : "/api/listAllGuards",
+	"DELETE_GUARD":"/api/deleteGuard"
 };
 
 /**
