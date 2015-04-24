@@ -63,7 +63,7 @@ updateGuard = function(req,res){
 
 
 listAllGuards=function(req,res){
-	mysql.queryDb('select * from guard left join person on guard.idperson = person.idperson',function(err,rows){
+	mysql.queryDb('SELECT * FROM guard',function(err,rows){
 		if (err) {
 			console.log("Error while listing all the guard details !!!"  + err);
 			res.status(500).json({ status : 500, message : "Error while listing guard details !!!" });
@@ -76,12 +76,12 @@ listAllGuards=function(req,res){
 
 deleteGuard=function(req,res){
 	console.log(JSON.stringify(req.body));
-	if(!req.params.idguard){
+	if(!req.body.idperson){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{
 		
-		idguard = req.params.idguard;
-				
+		idguard = req.params.idguard
+		
 		mysql.queryDb('DELETE FROM guard WHERE ?',[{idguard:idguard}],function(err,response){
 			if (err) {
 				console.log("Error while deleting guard details !!!");

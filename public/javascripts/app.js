@@ -28,17 +28,12 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 .run(['$rootScope','$window' ,'$location', 'DataService',function($rootScope,$window, $location,DataService) {
 	$rootScope.$on('$routeChangeStart', function(event) {
 
-<<<<<<< HEAD
-		// DataService.postData(urlConstants.IS_LOGGED_IN,[]).success(function(response){
-
-=======
 
 		/*DataService.postData(urlConstants.IS_LOGGED_IN,[]).success(function(response){
 =======
 		// DataService.postData(urlConstants.IS_LOGGED_IN,[]).success(function(response){
 >>>>>>> c91606129ff8007975f3844a037eff89579a8a14
 
->>>>>>> a44216599f801c9d879c8c8e15fd5312a2efeb26
 		// 	if($window.sessionStorage.userId){
 		// 		$rootScope.userId = $window.sessionStorage.userId;
 		// 		$rootScope.userName = $window.sessionStorage.userName;
@@ -48,9 +43,6 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 		// 	else{
 		// 		$location.path('/');
 		// 	}
-<<<<<<< HEAD
-
-=======
 
 
 		}).error(function(err){
@@ -73,7 +65,6 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 		});
 */
 
->>>>>>> a44216599f801c9d879c8c8e15fd5312a2efeb26
 		// }).error(function(err){
 		// 	if($window.sessionStorage.userId){
 		// 		var params = {
@@ -92,10 +83,7 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 		// 		$location.path('/');
 		// 	}
 		// });
-<<<<<<< HEAD
-=======
 
->>>>>>> a44216599f801c9d879c8c8e15fd5312a2efeb26
 
 		
 	});

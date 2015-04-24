@@ -14,7 +14,7 @@ createAlert = function(req,res){
 				idreport : req.body.idreport,
 				severity : req.body.severity,
 				date : req.body.date,
-				idguard : req.body.idguard
+				idguard : req.body.idguard,
 				status : 'F',
 				seenByClient : 'F'
 		}

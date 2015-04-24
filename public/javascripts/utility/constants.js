@@ -30,10 +30,7 @@ var urlConstants = {
 	"REJECT_CONNECTION_REQUEST" : "/api/user/connection/reject",
 	"GET_ALL_CONNECTIONS" : "/api/user/connection/",
 	"DELETE_EDUCATION" : "/api/user/education/",
-	"DELETE_EMPLOYMENT" : "/api/user/experience/",
-	//komal
-	"GET_ALL_GUARDS" : "/api/listAllGuards",
-	"DELETE_GUARD"	:	"/api/deleteGuard"
+	"DELETE_EMPLOYMENT" : "/api/user/experience/"
 };
 
 /**
