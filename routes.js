@@ -1,6 +1,6 @@
 var loginController = require('./controllers/login');
 var clientController = require('./controllers/client');
-var guardDetails = require('./controllers/guardDetails');
+//var guardDetails = require('./controllers/guardDetails');
 
 var adminController = require('./controllers/admin');
 

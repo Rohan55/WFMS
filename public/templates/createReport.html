@@ -2,11 +2,11 @@
 	<section id="main-content">
           <section class="wrapper">            
               
-      <div class="row"><h1>Hello from Create report</h1></div>
+      <div class="row"><h1>Create report</h1></div>
               <div class="col-md-12 portlets">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <div class="pull-left">Quick Post</div>
+                  <div class="pull-left">Create Alert</div>
                   <div class="widget-icons pull-right">
                     <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a> 
                     <a href="#" class="wclose"><i class="fa fa-times"></i></a>
@@ -21,34 +21,42 @@
                                       <form class="form-horizontal">
                                           <!-- Title -->
                                           <div class="form-group">
-                                            <label class="control-label col-lg-2" for="title">Title</label>
-                                            <div class="col-lg-10"> 
-                                              <input type="text" class="form-control" id="title">
-                                            </div>
+                                           <div class="input-group">
+									       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+									      <input type="date" id="dp-2" ng-model="alert_date" class="form-control" data-date-format="dd-mm-yyyy" data-date-viewmode="years"/>
+								        <!-- <datepicker id="dp-3" ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker> --> 
+								       </div>
                                           </div>   
                                           <!-- Content -->
                                           <div class="form-group">
-                                            <label class="control-label col-lg-2" for="content">Content</label>
+                                            <label class="control-label col-lg-2" for="content">Description</label>
                                             <div class="col-lg-10">
                                               <textarea class="form-control" id="content"></textarea>
                                             </div>
-                                          </div>                           
+                                          </div>  
+                                          <div class="form-group">
+                                            <label class="control-label col-lg-2">Alert Type</label>
+                                            <div class="col-lg-10">                               
+                                                <input class="datepicker" data-date-format="mm/dd/yyyy">    
+                                            </div>
+                                          </div>          
+                                                       
                                           <!-- Cateogry -->
                                           <div class="form-group">
-                                            <label class="control-label col-lg-2">Category</label>
+                                            <label class="control-label col-lg-2">Alert Type</label>
                                             <div class="col-lg-10">                               
                                                 <select class="form-control">
                                                   <option value="">- Choose Cateogry -</option>
-                                                  <option value="1">General</option>
-                                                  <option value="2">News</option>
-                                                  <option value="3">Media</option>
-                                                  <option value="4">Funny</option>
+                                                  <option value="1">Robbery</option>
+                                                  <option value="2">Maintenance Call</option>
+                                                  <option value="3">Fire</option>
+                                                  <option value="4">Theft</option>
                                                 </select>  
                                             </div>
                                           </div>              
                                           <!-- Tags -->
                                           <div class="form-group">
-                                            <label class="control-label col-lg-2" for="tags">Tags</label>
+                                            <label class="control-label col-lg-2" for="tags">Building</label>
                                             <div class="col-lg-10">
                                               <input type="text" class="form-control" id="tags">
                                             </div>

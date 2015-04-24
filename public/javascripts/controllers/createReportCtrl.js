@@ -1,19 +1,23 @@
 'use strict';
 wfms.controller("CreateReportCtrl", function($scope, $rootScope, DataService) {
-/*
-	$scope.getAllConnections = function(){
+$scope.createReport = function() {
 		
-		var uri = urlConstants.GET_ALL_CONNECTIONS + $rootScope.userId;
+		createReport();
 		
-		DataService.getData(uri,[]).success(function(response){
-			if(response.data){
-				$scope.connectionList = response.data;
-			}else{
-				$scope.connectionList = [{name:response.message}];
-			}
-		}).error(function(err){
-			console.log(err.message);
-		});
-	}
-*/
+		/**
+		 * Getting List of Companies for adding experience 
+		 */
+		
+		
+		function createAlert(){
+			
+			var uri = urlConstants.CREATE_ALERT+"1"+"1"+"10";
+			DataService.getData(uri,[]).success(function(response){
+				console.log("Guard Info"+response.data);
+				$scope.myProperties = response.data;
+			}).error(function(err){
+				console.log(err.message);
+			});
+		}
+}
 });

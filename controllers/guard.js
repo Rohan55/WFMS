@@ -102,8 +102,8 @@ getGuard=function(req,res){
 	}else{ 
 		
 		idguard = req.params.idguard,
-		mysql.queryDb('SELECT * FROM guard WHERE ?',[{idguard:idguard}],function(err,rows){
-
+		mysql.queryDb('SELECT * FROM guard g JOIN person p on ?? = ?? where p.idperson =? ;',['g.idperson','p.idperson', 'p.idperson'],function(err,rows){
+        
 			if (err) {
 				res.status(500).json({ status : 500, message : "Error while retrieving data" });
 			} else {

@@ -55,74 +55,45 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="index.html">
+                      <a class="" href ng-click="setTemplate('guardframe')">
                           <i class="icon_house_alt"></i>
                           <span>Dashboard</span>
                       </a>
                   </li>
-          <li class="sub-menu">
-                      <a href="javascript:;" class="">
+            <li class="sub-menu">
+                      <a class="" href ng-click="setTemplate('createReport')">
                           <i class="icon_document_alt"></i>
-                          <span>Forms</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
+                          <span>Create Report</span>
                       </a>
-                      <ul class="sub">
-                           <li><a class="" href ng-click="setTemplate('createReport')">Create Report</a></li>                         
-                          <li><a class="" href="form_validation.html">Create Patrol</a></li>
-                      </ul>
                   </li>       
                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
+                      <a class="" href ng-click="setTemplate('guardSchedule')" >
                           <i class="icon_desktop"></i>
-                          <span>UI Fitures</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="general.html">View My Schedule</a></li>
-                          <li><a class="" href="buttons.html"></a></li>
-                          <li><a class="" href="grids.html"></a></li>
-                      </ul>
-                  </li>
-                  <li>
-                      <a class="" href="widgets.html">
-                          <i class="icon_genius"></i>
-                          <span>Widgets</span>
+                          <span>My Schedule</span>                          
                       </a>
                   </li>
                   <li>                     
-                      <a class="" href="chart-chartjs.html">
+                      <a class="" href ng-click="setTemplate('viewReport')">
                           <i class="icon_piechart"></i>
-                          <span>Charts</span>
+                          <span>Report</span>
                           
                       </a>
                                          
                   </li>
-                             
-                  <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_table"></i>
-                          <span>Tables</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
+                  <li>
+                      <a class="" href ng-click="setTemplate('guardBuilding')">
+                          <i class="icon_genius"></i>
+                          <span>My Building</span>
                       </a>
-                      <ul class="sub">
-                          <li><a class="" href="basic_table.html">Basic Table</a></li>
-                      </ul>
                   </li>
                   
+                       
                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_documents_alt"></i>
-                          <span>Pages</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
+                      <a class="" href ng-click= >
+                          <i class="icon_key_alt"></i>
+                          <span>Logout</span>                          
                       </a>
-                      <ul class="sub">                          
-                          <li><a class="" href="profile.html">Profile</a></li>
-                          <li><a class="" href="login.html"><span>Login Page</span></a></li>
-                          <li><a class="" href="blank.html">Blank Page</a></li>
-                          <li><a class="" href="404.html">404 Error</a></li>
-                      </ul>
                   </li>
-                  
               </ul>
               <!-- sidebar menu end-->
           </div>

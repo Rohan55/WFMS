@@ -1,5 +1,5 @@
 var guardDetails = require('express').Router(),
-	mysql = require('./models/mysql');
+	//mysql = require('./models/mysql');
 
 
 /**

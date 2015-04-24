@@ -8,6 +8,7 @@ var urlConstants = {
 	"GET_ALL_USERS" : "/api/user",
 	"LOGOUT" : "/logout",
 	"GET_GUARD_DETAILS" : "/api/getGuard/",
+	"CREATE_ALERT" : "/api/createAlert",
 	"GET_EMPLOYMENT_DETAILS":"/api/user/experience/",
 	"GET_SUMMARY":"/api/user/summary/",
 	"GET_EDUCATION_DETAILS":"/api/user/education/",

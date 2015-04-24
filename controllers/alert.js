@@ -5,7 +5,7 @@ createAlert = function(req,res){
 	console.log(JSON.stringify(req.body));
 	console.log("This Api will be adding the alert");
 	console.log(req.body.idbuilding);
-	if(!req.body.idbuilding || !req.body.idreport || !req.body.severity || !req.body.date || !req.body.idguard){
+	if(!req.body.idbuilding || !req.body.idreport || !req.body.severity || !req.body.date || !req.body.idguard || !req.body.description || !req.body.time){
 		res.status(400).json({status : 400, message : "Bad Request"});
 	 } else {
 
@@ -16,7 +16,9 @@ createAlert = function(req,res){
 				date : req.body.date,
 				idguard : req.body.idguard,
 				status : 'F',
-				seenByClient : 'F'
+				seenByClient : 'F',
+				description : req.body.description,
+				time : req.body.time,
 		}
 
 		mysql.queryDb("INSERT INTO `wfms`.`alertinfo` SET ?", queryParam,function(err,resultAlert){
