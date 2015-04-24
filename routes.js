@@ -66,6 +66,7 @@ module.exports = function (app, passport) {
 
     
     //Building
+    app.get('/api/listBuilding/:idperson', buildingController.getBuilding);
     app.post('/api/createBuilding', buildingController.createBuilding);
     app.put('/api/editBuilding/:buildingid', buildingController.editBuilding);
     app.delete('/api/deleteBuilding/:buildingid', buildingController.deleteBuilding);
