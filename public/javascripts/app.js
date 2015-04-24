@@ -2,13 +2,11 @@
 var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider.when('/', {
-<<<<<<< HEAD
 		templateUrl : 'templates/index.ejs',
 		controller : 'IndexController'
-=======
+	}).when('/login', {
 		templateUrl : 'templates/login.ejs',
 		controller : 'LoginController'
->>>>>>> 16019bbbd82715e4c72db2af97c9934e1d5e9ca2
 	}).when('/client', {
 		templateUrl : 'templates/client.ejs',
 		controller : 'ClientController'
