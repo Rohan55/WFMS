@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var cookieSession = require('cookie-session');
+var path = require('path');
 var mysql = require('./models/mysql');
 
 var app = express();
@@ -20,12 +21,10 @@ app.use(morgan('dev'));
 app.use(cookieSession({ secret: '@cMpE@7#' , cookie: { maxAge: 60000 }}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(__dirname + '/public'));
-
-app.engine('html', ejs.renderFile);
+app.engine('ejs', ejs.renderFile);
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-
+app.set('views', path.join(__dirname , 'views'));
+app.use(express.static(__dirname + '/public'));
 //Authentication
 require('./util/auth')(passport);
 
