@@ -31,7 +31,7 @@ wfms.controller("ShowBuildingController", function($scope, $rootScope, $modal,
 		console.log("did i get called");
 
 		var modalInstance = $modal.open({
-			templateUrl : 'templates/editBuilding.html',
+			templateUrl : 'templates/client/editBuilding.html',
 			controller : 'EditBuildingCtrl',
 			size : 'lg',
 			/*resolve : {
