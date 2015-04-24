@@ -56,7 +56,7 @@ alertPerClient = function(req,res){
 	if(!req.params.idclient){
 		res.status(400).json({status : 400, message : "Bad Request"});
 	} else {
-		mysql.queryDb('SELECT * FROM wfms.alertinfo left outer join wfms.building on ?? = ?? where ?? = ?;',['wfms.building.idbuilding','wfms.alertinfo.idbuilding','idclient',req.params.idclient],function(err,resultAlert){
+		mysql.queryDb('SELECT * FROM wfms.alertinfo left outer join wfms.building on ?? = ?? where ?? = ? AND ?? = ?;',['wfms.building.idbuilding','wfms.alertinfo.idbuilding','idclient',req.params.idclient,'seenByClient','F'],function(err,resultAlert){
 
 			if (err) {
 				res.status(500).json({ status : 500, message : "Error while retrieving data" });
@@ -66,6 +66,27 @@ alertPerClient = function(req,res){
 		});
 	}
 }
+
+seenByClient = function(req,res){
+
+	console.log(JSON.stringify(req.body));
+	console.log("This Api will be for changing the status of seenBy client");
+	
+	if(!req.body.idalertInfo || !req.body.seenByClient){
+		res.status(400).json({status : 400, message : "Bad Request"});
+	} else {
+		mysql.queryDb('UPDATE `wfms`.`alertinfo` SET ??= ? WHERE ?? = ?;',['seenByClient',req.body.seenByClient,'idalertInfo',req.body.idalertInfo],function(err,result){
+
+			if (err) {
+				res.status(500).json({ status : 500, message : "Error while retrieving data" });
+			} else {
+				res.status(200).json({ status : 200, message : "Alert Updated", result:result});
+			}
+		});
+	}
+
+
+};
 
 alertPerDay = function(req,res){
 	
@@ -92,6 +113,9 @@ alertPerDay = function(req,res){
 	
 }
 
+
+exports.seenByClient = seenByClient;
+
 activeAdminAlerts= function(req,res){
 	mysql.queryDb('select * from alertinfo where status="F" ',function(err,rows){
 		if (err) {
@@ -102,6 +126,7 @@ activeAdminAlerts= function(req,res){
 		}
 	});
 };
+
 
 
 exports.alertPerDay = alertPerDay;

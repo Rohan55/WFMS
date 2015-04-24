@@ -17,14 +17,31 @@ wfms.controller("viewAlertClientController", function($scope, $rootScope,
 	$scope.getAlert = function(){
 		DataService.getData("/api/alertPerClient/1", []).success(
 				function(response) {
+
 					console.log("Hi"+response.resultAlert);
 					$scope.alert = response.resultAlert;
 				}).error(function(err) {
 			console.log("Error while fetching data");
 		});
-
-
 	};
+
+	$scope.seen = function(idalertInfo){
+		console.log("Id Alert: "+ this.idalertInfo);
+		var params = {
+				idalertInfo : this.idalertInfo,
+				seenByClient : 'T'
+				
+			};
+
+		DataService.putData("/api/alert/seenByClient",params).success(function(response){
+				console.log("Failed");
+				console.log("Failed");
+
+			}).error(function(err){
+				console.log("Done");
+			});
+		
+	}
 	// $scope.signInFormError = "";
 
 	// $scope.signIn = function() {
