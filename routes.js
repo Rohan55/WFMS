@@ -51,16 +51,13 @@ module.exports = function (app, passport) {
     app.get('/api/alertPerClient/:idclient', ensureAuthenticated, alertController.alertPerClient);
     app.get('/api/alertPerDay/:date', ensureAuthenticated, alertController.alertPerDay);
 
-
     app.put('/api/alert/seenByClient', ensureAuthenticated, alertController.seenByClient);
     
    
     app.get('/api/activeAdminAlerts', ensureAuthenticated, alertController.activeAdminAlerts);
     
-    app.put('/api/alert/seenByClient', ensureAuthenticated, alertController.seenByClient);
-    
-    app.get('/api/activeAdminAlerts', ensureAuthenticated, alertController.activeAdminAlerts);
- 
+
+   
 
     
     //Guard

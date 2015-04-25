@@ -4,9 +4,6 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 	$routeProvider.when('/', {
 		templateUrl : 'templates/index.ejs',
 		controller : 'IndexController'
-	}).when('/login', {
-		templateUrl : 'templates/login.ejs',
-		controller : 'LoginController'
 	}).when('/client', {
 		templateUrl : 'templates/client.ejs',
 		controller : 'ClientController'
