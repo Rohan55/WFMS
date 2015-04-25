@@ -16,7 +16,8 @@ createBuilding = function(req,res){
 				release_date : req.body.releaseDate,
 				address : req.body.address,
 				service_fees : req.body.service_fees,
-				checkpoint : req.body.checkpoint
+				checkpoint : req.body.checkpoint,
+				buildingstatus:"Active"
 		}
 
 		mysql.queryDb("INSERT INTO building SET ?", queryParam, function(err, response) {
@@ -30,13 +31,27 @@ createBuilding = function(req,res){
 	}
 };
 
+getBuildingClientReport = function(req,res){
+	if(!req.params.idperson){
+		res.status(400).json({ status : 400, message : "Bad Request" });
+	}else{ 
+		mysql.queryDb('SELECT * FROM building WHERE ?',[{idclient:req.params.idperson}],function(err,rows){
 
+			if (err) {
+				res.status(500).json({ status : 500, message : "Error while retrieving data" });
+			} else {
+				res.status(200).json({ status : 200, data : rows });
+			}
+		});
+	}
+
+};
 getBuilding=function(req,res){
 	
 	if(!req.params.idperson){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{ 
-		mysql.queryDb('SELECT * FROM building WHERE ?',[{idclient:req.params.idperson}],function(err,rows){
+		mysql.queryDb('SELECT * FROM building WHERE ? and buildingstatus = "Active"',[{idclient:req.params.idperson}],function(err,rows){
 
 			if (err) {
 				res.status(500).json({ status : 500, message : "Error while retrieving data" });
@@ -79,8 +94,10 @@ deleteBuilding=function(req,res){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{
 		var buildingid = req.params.buildingid;
-		
-		mysql.queryDb('DELETE FROM building WHERE ?',[{idbuilding:buildingid}],function(err,response){
+		var newParam ={
+				buildingstatus : "Disable"
+				};
+		mysql.queryDb('UPDATE building SET ? WHERE ?? = ?',[newParam,'idbuilding',req.params.buildingid],function(err,response){
 			if (err) {
 				console.log("Error while deleting building details !!!");
 				console.log(err);
@@ -92,7 +109,7 @@ deleteBuilding=function(req,res){
 	}
 };
 
-
+exports.getBuildingClientReport = getBuildingClientReport;
 exports.getBuilding = getBuilding;
 exports.createBuilding = createBuilding;
 exports.editBuilding = editBuilding;

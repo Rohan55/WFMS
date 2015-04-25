@@ -54,11 +54,18 @@ module.exports = function (app, passport) {
     app.put('/api/alert/seenByClient', ensureAuthenticated, alertController.seenByClient);
     
    
+
     app.get('/api/activeAdminAlerts', ensureAuthenticated, alertController.activeAdminAlerts);
     
+<<<<<<< HEAD
 
    
 
+=======
+   
+    app.get('/api/activeAdminAlerts', ensureAuthenticated, alertController.activeAdminAlerts);
+    
+>>>>>>> d8522157ac488fcec68d0e5ac9abeee84994eaee
     
     //Guard
     app.post('/api/createGuard', ensureAuthenticated, guardController.createGuard);
@@ -71,6 +78,7 @@ module.exports = function (app, passport) {
 
     
     //Building
+    app.get(('/api/getBuildingClientReport/:idperson', buildingController.getBuildingClientReport);
     app.get('/api/listBuilding/:idperson', buildingController.getBuilding);
     app.post('/api/createBuilding', buildingController.createBuilding);
     app.put('/api/editBuilding/:buildingid', buildingController.editBuilding);

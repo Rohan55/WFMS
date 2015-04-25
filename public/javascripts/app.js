@@ -30,9 +30,9 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 
 
 		/*DataService.postData(urlConstants.IS_LOGGED_IN,[]).success(function(response){
-=======
+
 		// DataService.postData(urlConstants.IS_LOGGED_IN,[]).success(function(response){
->>>>>>> c91606129ff8007975f3844a037eff89579a8a14
+
 
 		// 	if($window.sessionStorage.userId){
 		// 		$rootScope.userId = $window.sessionStorage.userId;
