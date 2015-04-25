@@ -15,6 +15,28 @@ wfms.controller("ViewAllAlertsCtrl", function($scope, $rootScope, DataService) {
 		});
 	}
 	
+	$scope.publishAlert = function(data) {
+		console.log(data.description);
+	
+		var modalInstance = $modal.open({
+			templateUrl : 'templates/admin/publishAlert.html',
+			controller : 'PublishAlertCtrl',
+			size : 'lg',
+			resolve : {
+				isEdit : function(){
+					return data;
+				}
+		
+			}
+		});
+		
+		modalInstance.result.then(function(isValid) {
+			if (isValid) {
+				getAllAlerts();
+			}
+		}, function() {
+		});
+	}
 /*	$scope.deleteCall = function(guard){
 		
 		console.log("to delete"+guard.guard.fname);
