@@ -51,6 +51,7 @@ module.exports = function (app, passport) {
     app.get('/api/alertPerClient/:idclient', ensureAuthenticated, alertController.alertPerClient);
     app.get('/api/alertPerDay/:date', ensureAuthenticated, alertController.alertPerDay);
 
+<<<<<<< HEAD
     app.put('/api/alert/seenByClient', ensureAuthenticated, alertController.seenByClient);
     
    
@@ -59,6 +60,18 @@ module.exports = function (app, passport) {
     
 
    
+=======
+
+    app.put('/api/alert/seenByClient', ensureAuthenticated, alertController.seenByClient);
+    
+   
+    app.get('/api/activeAdminAlerts', ensureAuthenticated, alertController.activeAdminAlerts);
+    
+    app.put('/api/alert/seenByClient', ensureAuthenticated, alertController.seenByClient);
+    
+    app.get('/api/activeAdminAlerts', ensureAuthenticated, alertController.activeAdminAlerts);
+ 
+>>>>>>> 85cd3beb7f5e32821901e4fc6ce1a9f747c6f4c5
 
     
     //Guard
@@ -90,6 +103,12 @@ module.exports = function (app, passport) {
     app.get('/templates/admin/:file',function(req,res){
         var file = req.params.file;
         res.render('templates/admin/' + file);
+    });
+
+    //For Index templates
+    app.get('/templates/index/:file',function(req,res){
+        var file = req.params.file;
+        res.render('templates/index/' + file);
     });
 
     //Auth Middleware
