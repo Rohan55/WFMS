@@ -1,5 +1,5 @@
 'use strict';
-wfms.controller("ViewAllAlertsCtrl", function($scope, $rootScope, DataService) {
+wfms.controller("ViewAllAlertsCtrl", function($scope, $rootScope, $modal, DataService) {
 
 	$scope.getAllAlerts = function(){
 		console.log("function called");
