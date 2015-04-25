@@ -31,7 +31,21 @@ createBuilding = function(req,res){
 	}
 };
 
+getBuildingClientReport = function(req,res){
+	if(!req.params.idperson){
+		res.status(400).json({ status : 400, message : "Bad Request" });
+	}else{ 
+		mysql.queryDb('SELECT * FROM building WHERE ?',[{idclient:req.params.idperson}],function(err,rows){
 
+			if (err) {
+				res.status(500).json({ status : 500, message : "Error while retrieving data" });
+			} else {
+				res.status(200).json({ status : 200, data : rows });
+			}
+		});
+	}
+
+};
 getBuilding=function(req,res){
 	
 	if(!req.params.idperson){
@@ -97,7 +111,7 @@ deleteBuilding=function(req,res){
 	}
 };
 
-
+exports.getBuildingClientReport = getBuildingClientReport;
 exports.getBuilding = getBuilding;
 exports.createBuilding = createBuilding;
 exports.editBuilding = editBuilding;
