@@ -16,8 +16,6 @@ wfms.controller("ViewAllAlertsCtrl", function($scope, $rootScope, $modal, DataSe
 	}
 	
 	$scope.publishAlert = function(data) {
-		console.log(data.description);
-	
 		var modalInstance = $modal.open({
 			templateUrl : 'templates/admin/publishAlert.html',
 			controller : 'PublishAlertCtrl',

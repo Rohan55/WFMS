@@ -2,24 +2,16 @@
 wfms.controller("PublishAlertCtrl", function($scope, $modalInstance,
 		 isEdit, $rootScope, DataService) {
 
-	
-	
-	console.log("isEdit"+isEdit);
 
 	if (isEdit) {
-		$scope.buildingname = isEdit.buildingname;
-		$scope.start_date = isEdit.start_date;
-		$scope.release_date = isEdit.release_date;
-		$scope.address = isEdit.address;
-		$scope.checkpoint = isEdit.checkpoint;
-		
+		$scope.description = isEdit.description;
+		$scope.severity = isEdit.severity;
+		$scope.date = isEdit.date;
 	} else {
-		$scope.buildingname ="";
-		$scope.start_date = "";
-		$scope.release_date="";
-		$scope.address = "";
-		$scope.checkpoint = "";
-	};
+		$scope.description ="";
+		$scope.severity ="";
+		$scope.date ="";
+		};
 	
 	
 	$scope.open = function($event) {
