@@ -1,36 +1,90 @@
 var dateutil = require('../util/dateutil'),
 	moment = require('moment');
+var crypto = require('crypto');
+
 
 
 createGuard = function(req,res){
-	
-	console.log(JSON.stringify(req.body));
-	
-	if(!req.body.idperson || !req.body.start_date || !req.body.end_date || !req.body.weekly_working_set || !req.body.bgstatus){
-		res.status(400).json({status : 400, message : "Bad Request"});
-	}else{
-		var formDate = moment(req.body.start_date,'DD-MM-YYYY').toDate();
-		var toDate = moment(req.body.end_date,'DD-MM-YYYY').toDate();
+    //var vpw = req.body.vpw;
+    console.log("create guard inside");
+    var pwu = req.body.password;
+    var un = req.body.email;
+    var fn = req.body.fname;
+    var ln = req.body.lname;
+    var usertype = req.body.usertype;
+    var address = req.body.address;
+    var city = req.body.city;
+    var zipcode = req.body.zipcode;
+    var phonenumber = req.body.phonenumber;
 
-		var queryParam = {
-				idguard : req.body.idguard,
-				idperson : req.body.idperson,
-				start_date : formDate,
-				end_date : toDate,
-				weekly_working_set : req.body.weekly_working_set,
-				bgstatus: req.body.bgstatus
-		}
+    req.checkBody('email', 'Please enter a valid email.').notEmpty().isEmail();
+    var errors = req.validationErrors();
+    if (errors) {
+        console.log(errors);
+        var msg = errors[0].msg;
+        res.status(400).json({
+            status : 400,
+            message : msg
+        });
+    }
+    
+    var new_salt = Math.round((new Date().valueOf() * Math.random())) + '';
+    var pw = crypto.createHmac('sha1', new_salt).update(pwu).digest('hex');
+    var created = dateutil.now();
+    
+    var data={
+        email:un,
+        password_hash:pw,
+        status:true,
+        type:usertype,
+        created_date:created,
+        last_login:created,
+        password_salt:new_salt
+    };
 
-		mysql.queryDb("INSERT INTO guard SET ?", queryParam, function(err, response) {
-			if (err) {
-				console.log("Error while perfoming query !!!");
-				res.status(500).json({ status : 500, message : "Please try again later" });
-			} else {
-				res.status(200).json({ status : 200, message : "Guard has been added Succesfully" });
-			}
-		});
-	}
+    mysql.queryDb('insert into login set ?',data,function(err,result){
+      if(err) {
+        console.log(err);
+            res.status(500).json({ status : 500, message : "Please try again later" });
+      } else {
+            
+        var idperson = result.insertId;
+
+        mysql.queryDb('insert into person set ?',{idperson: idperson,fname : fn,
+                  lname : ln,
+                  email : un,
+                  address: address,
+                  city:city,
+                  zipcode:zipcode,
+                  phonenumber:phonenumber
+                  },
+        function(err,result){
+          if(err) {
+            res.status(500).json({ status : 500, message : "Please try again later" });
+          } else {
+        	  		var queryParam = {
+      				idperson :	idperson,
+      				start_date : req.body.start_date,
+      				end_date : req.body.end_date,
+      				weekly_working_set : req.body.weekly_working_set,
+      				bgstatus: req.body.bgstatus
+      		}
+
+      		mysql.queryDb("INSERT INTO guard SET ?", queryParam, function(err, response) {
+      			if (err) {
+      				console.log("Error while perfoming query !!!");
+      				res.status(500).json({ status : 500, message : "Please try again later" });
+      			} else {
+      				res.status(200).json({ status : 200, message : "Guard has been added Succesfully" });
+      			}
+      		});
+        	  
+          }
+        });
+      }
+    });
 };
+
 
 
 updateGuard = function(req,res){
