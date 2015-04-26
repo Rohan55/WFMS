@@ -26,40 +26,23 @@ $scope.publish = function() {
 	if (isEdit) {
 			console.log($scope.idalertInfo);
 
-			/*var params = {
+			var params = {
 				
 				idalertInfo : $scope.idalertInfo
 						
 			};
 			
 			
-			DataService.putData('/api/editBuilding', params)
+			DataService.putData('/api/alert/seenByAdmin', params)
 			.success(function(response) {
+			
 				$modalInstance.close(true);
 			}).error(function(err) {
 				$modalInstance.close(false);
-			});*/
+			});
 
 }
-		
-	/*	else {
-			var params = {
-					
-					//idclient : $rootScope.userId,
-					idclient : 1,
-					start_date:$scope.start_date,
-					release_date : $scope.release_date,
-					buildingname:  $scope.buildingname,
-					address : $scope.address,
-					checkpoint : $scope.checkpoint
-						
-				};
-			DataService.postData("/api/createBuilding",params).success(function(response){
-				$modalInstance.close(true);
-			}).error(function(err){
-				$modalInstance.dismiss(false);
-			});
-		}*/
+	
 	
 };
 
