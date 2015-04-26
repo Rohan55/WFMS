@@ -30,25 +30,10 @@ wfms.controller("ViewAllAlertsCtrl", function($scope, $rootScope, $modal, DataSe
 		
 		modalInstance.result.then(function(isValid) {
 			if (isValid) {
-				getAllAlerts();
+				$scope.getAllAlerts();
 			}
 		}, function() {
 		});
 	}
-/*	$scope.deleteCall = function(guard){
-		
-		console.log("to delete"+guard.guard.fname);
-		
-		var uri = urlConstants.DELETE_GUARD+"/"+guard.guard.idguard;
-		
-		DataService.deleteData(uri,[]).success(function(response){
-			alert("Guard Deleted Successfully");
-			
-		}).error(function(err){
-			
-		});
-		this.getAllGaurds();
-	}*/
-	
 
 });
