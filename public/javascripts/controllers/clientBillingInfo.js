@@ -15,12 +15,25 @@ wfms.controller("clientBillingInfo", function($scope, $rootScope,
 	$scope.buildingName = "Building 1";
 
 	$scope.getBillingInfo = function(){
-		DataService.getData("/api/getClient/7", []).success(
+
+		var params = {
+			//idclient : $rootScope.idclient;
+			idclient : 1
+		};
+
+		DataService.putData("/api/updateClientBillingInfo", params).success(
 				function(response) {
-					$scope.billingInfo = response.data;
+					
 				}).error(function(err) {
-			console.log("Error while fetching data");
+			console.log("Error while updating client billing information");
 		});
+
+		// DataService.getData("/api/getClient/1", []).success(
+		// 		function(response) {
+		// 			$scope.billingInfo = response.data;
+		// 		}).error(function(err) {
+		// 	console.log("Error while fetching data");
+		// });
 
 
 	};

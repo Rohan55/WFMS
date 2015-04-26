@@ -30,5 +30,29 @@ wfms.controller("ViewAllGuardsCtrl", function($scope, $rootScope, DataService) {
 		this.getAllGaurds();
 	}
 	
+	$scope.modifyGuard = function(data) {
+		console.log("edit guard");
+
+		var modalInstance = $modal.open({
+			templateUrl : 'templates/admin/editGuard.html',
+			controller : 'EditGuardCtrl',
+			size : 'lg',
+			resolve : {
+				isEdit : function(){
+					return data;
+				}
+		
+			}
+		});
+
+		modalInstance.result.then(function(isValid) {
+			if (isValid) {
+				$scope.getAllGuards();
+			}
+		}, function() {
+		});
+	};
+
+	
 
 });

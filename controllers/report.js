@@ -1,6 +1,53 @@
 var dateutil = require('../util/dateutil'),
         moment = require('moment');
 
+reportPerClientPerBuilding = function(req,res){
+        console.log(JSON.stringify(req.body));
+        console.log("This Api will be for fetching alerts and patrols according to buildings and date");
+        //var reportdate = moment(req.body.date_report,"MM-DD-YYYY");
+        //date_report = date_report.substring(0, 10);
+        var reportdate = req.body.date_report.toString();
+        reportdate = reportdate.substring(0,10);
+        console.log("reportdate: "+reportdate);
+        console.log(Object.prototype.toString.call(req.body.date_report));
+        if(!req.body.idbuilding || !reportdate || !req.body.idclient){
+                res.status(400).json({status : 400, message : "Bad Request"});
+        } else {
+                mysql.queryDb('SELECT * from wfms.report left outer join wfms.building on report.idbuilding = building.idbuilding where ?? = ? AND ?? = ? AND ?? = ?;',['report.date',""+reportdate+"",'building.idclient',req.body.idclient,'report.idbuilding',req.body.idbuilding], function(err, result) {
+                if (err) {
+                        console.log("Error while perfoming query !!!");
+                        res.status(500).json({ status : 500, message : "Please try again later" });
+                } else {
+                        if(result.length == 0){
+                                console.log("printing status 500 when no report found");
+                                res.status(200).json({ status : 501, message : "No Report for selected date and building" });
+                        }
+                        else{
+                                mysql.queryDb("SELECT * FROM wfms.patrol where ?? = ?",['idreport',result[0].idreport], function(err, resultPatrol) {
+                                if (err) {
+                                        console.log("Error while perfoming query !!!");
+                                        res.status(500).json({ status : 500, message : "Please try again later" });
+                                } else {
+                                        mysql.queryDb("SELECT * FROM wfms.alertinfo where ?? = ?",['idreport',result[0].idreport], function(err, resultAlert) {
+                                                if (err) {
+                                                        console.log("Error while perfoming query !!!");
+                                                        res.status(500).json({ status : 500, message : "Please try again later" });
+                                                } else {
+
+                                                        res.status(200).json({ status : 200, message : "Report for Building", resultAlert:resultAlert, resultPatrol:resultPatrol});
+                                                }
+                                        });
+
+
+                                }
+                        });
+                        }
+
+                }
+        });
+        }
+
+}
 createReport = function(req,res){
         console.log(JSON.stringify(req.body));
         console.log("This API will be returning Report Id for the corresponding guard and building id");
@@ -170,7 +217,7 @@ reportPerDay = function(req,res){
         }
 
 }
-
+exports.reportPerClientPerBuilding = reportPerClientPerBuilding;
 exports.reportPerGuard = reportPerGuard;
 exports.reportPerDay = reportPerDay;
 exports.reportPerClient = reportPerClient;

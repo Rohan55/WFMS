@@ -1,5 +1,5 @@
 'use strict';
-wfms.controller("ViewAllAlertsCtrl", function($scope, $rootScope, DataService) {
+wfms.controller("ViewAllAlertsCtrl", function($scope, $rootScope, $modal, DataService) {
 
 	$scope.getAllAlerts = function(){
 		console.log("function called");
@@ -15,20 +15,25 @@ wfms.controller("ViewAllAlertsCtrl", function($scope, $rootScope, DataService) {
 		});
 	}
 	
-/*	$scope.deleteCall = function(guard){
+	$scope.publishAlert = function(data) {
+		var modalInstance = $modal.open({
+			templateUrl : 'templates/admin/publishAlert.html',
+			controller : 'PublishAlertCtrl',
+			size : 'lg',
+			resolve : {
+				isEdit : function(){
+					return data;
+				}
 		
-		console.log("to delete"+guard.guard.fname);
-		
-		var uri = urlConstants.DELETE_GUARD+"/"+guard.guard.idguard;
-		
-		DataService.deleteData(uri,[]).success(function(response){
-			alert("Guard Deleted Successfully");
-			
-		}).error(function(err){
-			
+			}
 		});
-		this.getAllGaurds();
-	}*/
-	
+		
+		modalInstance.result.then(function(isValid) {
+			if (isValid) {
+				$scope.getAllAlerts();
+			}
+		}, function() {
+		});
+	}
 
 });

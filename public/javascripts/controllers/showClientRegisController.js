@@ -28,7 +28,7 @@ wfms.controller("ShowClientRegisController", function($scope, $rootScope, $modal
 			
 			var params = {
 					
-					username : $scope.email,
+					email : $scope.email,
 					password:  $scope.password
 						
 				};

@@ -10,7 +10,7 @@
                                              
                           <table class="table table-striped table-advance table-hover">
                            <tbody>
-                              <tr>
+                              <tr ng-if="(guardListResults | filter:criteria).length">
                                  <th style="text-align: center;">First Name</th>
                                  <th style="text-align: center;">Last Name</th>
                                  <th style="text-align: center;">BG Status</th>
@@ -24,13 +24,18 @@
                                  <th style="text-align: center;">Phone Number</th>
                                  <th style="text-align: center;">Action</th>
                               </tr>
-                                 <tr ng-repeat="guard in guardListResults">
+                              <tr ng-if="!(guardListResults | filter:criteria).length">
+                                  <td>
+                                      No data available.                
+                                  </td>
+                              </tr>
+                              <tr ng-repeat="guard in guardListResults">
                                  <td style="text-align: center;">{{guard.fname}}</td>
                                  <td style="text-align: center;">{{guard.lname}}</td>
                                  <td style="text-align: center;">{{guard.bgstatus}}</td>
                                  <td style="text-align: center;">{{guard.weekly_working_set}}</td>
-                                 <td style="text-align: center;">{{guard.start_date}}</td>
-                                 <td style="text-align: center;">{{guard.end_date}}</td>
+                                 <td style="text-align: center;">{{guard.start_date| date : 'mediumDate'}}</td>
+                                 <td style="text-align: center;">{{guard.end_date| date : 'mediumDate'}}</td>
                                  <td style="text-align: center;">{{guard.address}}</td>
                                  <td style="text-align: center;">{{guard.city}}</td>
                                  <td style="text-align: center;">{{guard.zipcode}}</td>
@@ -38,7 +43,7 @@
                                  <td style="text-align: center;">{{guard.phonenumber}}</td>
                                  <td style="text-align: center;">
                                   <div class="btn-group">
-                                      <a href="#">Edit</a>
+                                      <a href="#" ng-click=modifyGuard(guard)>Edit</a>
                                       <a href ng-click="deleteCall(this)">Delete</a>
                                   </div>
                                   </td>
