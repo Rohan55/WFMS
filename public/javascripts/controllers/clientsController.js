@@ -1,5 +1,5 @@
 'use strict';
-wfms.controller("ViewAllClientsCtrl", function($scope, $rootScope, DataService) {
+wfms.controller("ClientsCtrl", function($scope, $rootScope, DataService) {
 
 	$scope.getAllClients = function(){
 		DataService.getData(urlConstants.GET_ALL_CLIENTS,[]).success(function(response){
