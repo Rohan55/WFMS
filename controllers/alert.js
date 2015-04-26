@@ -129,6 +129,7 @@ activeAdminAlerts= function(req,res){
 
 
 
+
 exports.alertPerDay = alertPerDay;
 exports.alertPerClient = alertPerClient;
 exports.alertPerBuilding = alertPerBuilding

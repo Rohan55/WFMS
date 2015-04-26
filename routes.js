@@ -47,15 +47,13 @@ module.exports = function (app, passport) {
     app.get('/api/alertPerClient/:idclient', ensureAuthenticated, alertController.alertPerClient);
     app.get('/api/alertPerDay/:date', ensureAuthenticated, alertController.alertPerDay);
 
-
     app.put('/api/alert/seenByClient', ensureAuthenticated, alertController.seenByClient);
     
    
 
-    
-   
     app.get('/api/activeAdminAlerts', ensureAuthenticated, alertController.activeAdminAlerts);
     
+
     
     //Guard
     app.post('/api/createGuard', ensureAuthenticated, guardController.createGuard);
@@ -68,10 +66,14 @@ module.exports = function (app, passport) {
 
     
     //Building
+
     //app.get(('/api/getBuildingClientReport/:idperson', buildingController.getBuildingClientReport);
+
+    app.get('/api/getBuildingClientReport/:idperson', buildingController.getBuildingClientReport);
+
     app.get('/api/listBuilding/:idperson', buildingController.getBuilding);
     app.post('/api/createBuilding', buildingController.createBuilding);
-    app.put('/api/editBuilding/:buildingid', buildingController.editBuilding);
+    app.put('/api/editBuilding', buildingController.editBuilding);
     app.delete('/api/deleteBuilding/:buildingid', buildingController.deleteBuilding);
 
     

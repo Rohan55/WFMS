@@ -85,6 +85,7 @@ updateClient = function(req,res){
 				start_date : moment(req.body.start_date,'DD-MM-YYYY').toDate(),
 				end_date : moment(req.body.end_date,'DD-MM-YYYY').toDate()
 		};
+		console.log(start_date);
 		//and ?? = ? and ?? = ?
 		//'start_date',old.start_date,'end_date',old.end_date
 		mysql.queryDb("UPDATE client SET ? WHERE ?? = ?", 
