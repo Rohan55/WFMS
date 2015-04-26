@@ -15,43 +15,56 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
+				<div class = "text-center">
 					<section class="panel">
+			<header class="panel-heading" > <Strong>Total Amount: {{ billingInfo | sumByKey: 'Amount_Due'}} </Strong></header>
+			</section>
+			</div>
+			</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="panel">
+					
 					<div ng-repeat = "data in billingInfo">
-						<header class="panel-heading" ng-model = "buildingName"> Building Name: {{buildingName}} </header>
+						
+						<header class="panel-heading" ng-model = "buildingName"> Building Name: {{data.buildingname}} </header>
 						<div class="panel-body">
 							<form class="form-horizontal "  >
 							
 
 								<div class="form-group">
-									<label class="col-lg-2 control-label">Building Name</label>
+									<label class="col-lg-2 control-label">Building Number</label>
 									<div class="col-lg-10">
-										<p class="form-control-static">email@example.com</p>
+										<p class="form-control-static">{{data.idbuilding}}</p>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-lg-2 control-label">Number of Gaurds Assigned</label>
 									<div class="col-lg-10">
-										<p class="form-control-static">email@example.com</p>
+										<p class="form-control-static">{{data.no_of_guards}}</p>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-lg-2 control-label">Release Date</label>
 									<div class="col-lg-10">
-										<p class="form-control-static">email@example.com</p>
+										<p class="form-control-static">{{data.release_date | date:'yyyy/MM/dd'}}</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">Start Date</label>
+									<div class="col-lg-10">
+										<p class="form-control-static">{{data.start_date | date:'yyyy/MM/dd'}}</p>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-lg-2 control-label">Monthly Subscription</label>
 									<div class="col-lg-10">
-										<p class="form-control-static">{{data.monthly_service}}</p>
+										<p class="form-control-static">{{data.Amount_Due}}</p>
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="col-lg-2 control-label">Balance</label>
-									<div class="col-lg-10">
-										<p class="form-control-static">email@example.com</p>
-									</div>
-								</div>
+								
 															</form>
 						</div>
 						</div>

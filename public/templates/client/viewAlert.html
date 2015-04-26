@@ -26,13 +26,13 @@
                                  <th><i class="icon_cogs"></i> Action</th>
                               </tr>
                               <tr ng-repeat="data in alert">
-                                 <td>{{data.date | date:'yyyy/MM/dd'}}</td>
+                                 <td>{{data.date | date:'yyyy-MM-dd'}}</td>
                                  <td>{{data.time}}</td>
                                  <td>{{data.severity}}</td>
                                  <td>{{data.description}}</td>
                                  <td>
                                   <div class="btn-group">
-                                      <a class="btn btn-success" ng-click = "addList()" href="#"><i class="icon_check_alt2"></i></a>
+                                      
                                       <a class="btn btn-danger" ng-click = "seen(this)" ><i class="icon_close_alt2"></i></a>
                                   </div>
                                   </td>

@@ -32,43 +32,13 @@ updateClientBillingInfo = function(req,res){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{
 		
-		mysql.queryDb('select building.idbuilding, building.no_of_guards, building.start_date, building.release_date from wfms.building inner join wfms.client on building.idclient = client.idclient where ?? = ? AND ?? = ?',['building.idclient',req.body.idclient, 'building.buildingstatus' , "Active"],function(err,rows){
+		mysql.queryDb("select (abs(DATEDIFF(building.release_date,building.start_date)))*building.no_of_guards*10 AS Amount_Due, building.idbuilding, building.no_of_guards, building.start_date, building.buildingname, building.release_date from wfms.building inner join wfms.client on building.idclient = client.idclient where ?? = ? AND ?? = 'Active';",['building.idclient',req.body.idclient,'building.buildingstatus'],function(err,rows){
 
 			if (err) {
 				res.status(500).json({ status : 500, message : "Error while retrieving data" });
 			} else {
-				console.log(rows[0].start_date);
-				for(var i = 0 ; i<rows.length;i++) {
+				res.status(200).json({ status : 200, message : "Value is coming",result:rows });
 					
-					
-					console.log(rows[i].start_date);
-					var start_date = moment(rows[i].start_date,'YYYY-MM-DD');
-					
-					console.log("start_date " + start_date)
-					var end_date = moment(rows[i].release_date,'YYYY-MM-DD');
-					
-					console.log("end_date: "+ end_date);
-					var numberOfDays = end_date.diff(start_date, 'days');
-					
-					console.log(numberOfDays);
-					console.log("rows"+rows[i].no_of_guards);
-
-					var monthlySubscrption = (numberOfDays * rows[i].no_of_guards * 10);
-					console.log("monthlySubscrption: "+monthlySubscrption);
-					mysql.queryDb("UPDATE building SET ?? = ? WHERE ?? = ? AND ?? = ? AND ?? = ?", 
-					['service_fees',monthlySubscrption,'idclient',req.body.idclient,'buildingstatus',"Active",'idbuilding',rows[i].idbuilding], 
-						function(err, response) {
-						if (err) {
-							console.log("Error while perfoming query !!!" + err);
-							
-						} else {
-							console.log("Done Successfully");
-							if(i === rows.length-1){
-								res.status(200).json({ status : 200, message : "Client has been updated Succesfully" });
-							}
-						}
-					});
-				}
 				
 			}
 		});
