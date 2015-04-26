@@ -1,9 +1,8 @@
 'use strict';
-wfms.controller("ViewAllGuardsCtrl", function($scope, $rootScope, DataService) {
+wfms.controller("ViewAllGuardsCtrl", function($scope, $rootScope, $modal, DataService) {
 
 	$scope.getAllGaurds = function(){
-		console.log("function called");
-		var uri = urlConstants.GET_ALL_GUARDS;
+	var uri = urlConstants.GET_ALL_GUARDS;
 		
 		DataService.getData(uri,[]).success(function(response){
 			if(response.data){

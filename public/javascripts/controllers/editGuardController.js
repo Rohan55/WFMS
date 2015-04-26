@@ -7,18 +7,30 @@ wfms.controller("EditGuardCtrl", function($scope, $modalInstance,
 	console.log("isEdit"+isEdit);
 
 	if (isEdit) {
-		$scope.buildingname = isEdit.buildingname;
+		$scope.fname = isEdit.fname;
+		$scope.lname = isEdit.lname;
+		$scope.bgstatus = isEdit.bgstatus;
+		$scope.weekly_working_set = isEdit.weekly_working_set;
 		$scope.start_date = isEdit.start_date;
-		$scope.release_date = isEdit.release_date;
+		$scope.end_date = isEdit.end_date;
 		$scope.address = isEdit.address;
-		$scope.checkpoint = isEdit.checkpoint;
+		$scope.zipcode = isEdit.zipcode;
+		$scope.city = isEdit.city;
+		$scope.email = isEdit.email;
+		$scope.phonenumber = isEdit.phonenumber;
 		
 	} else {
-		$scope.buildingname ="";
+		$scope.fname = "";
+		$scope.lname = ""
+		$scope.bgstatus = "";
+		$scope.weekly_working_set = "";
 		$scope.start_date = "";
-		$scope.release_date="";
+		$scope.end_date = "";
 		$scope.address = "";
-		$scope.checkpoint = "";
+		$scope.zipcode = "";
+		$scope.city = "";
+		$scope.email = "";
+		$scope.phonenumber = "";
 	};
 	
 	
@@ -31,7 +43,7 @@ wfms.controller("EditGuardCtrl", function($scope, $modalInstance,
 	
 
 $scope.okay = function() {
-	if($scope.buildingname && $scope.address && $scope.start_date &&  $scope.releaseDate && $scope.checkpoint){
+	if($scope.start_date && $scope.end_date){
 		
 		if (isEdit) {
 			console.log(isEdit);
@@ -40,23 +52,29 @@ $scope.okay = function() {
 				
 				
 					//idclient : $rootScope.userId,
-					idclient : 1,
-					idbuilding:isEdit.idbuilding,
-					start_date:$scope.start_date,
-					release_date : $scope.release_date,
-					buildingname:  $scope.buildingname,
-					address : $scope.address,
-					checkpoint : $scope.checkpoint
+			idperson : isEdit.idperson,
+			fname : isEdit.fname,
+			lname : isEdit.lname,
+			bgstatus : isEdit.bgstatus,
+			weekly_working_set : isEdit.weekly_working_set,
+			start_date : isEdit.start_date,
+			end_date : isEdit.end_date,
+			address : isEdit.address,
+			zipcode : isEdit.zipcode,
+			city : isEdit.city,
+			email : isEdit.fname,
+			phonenumber : isEdit.phonenumber
 				
 			};
 			
-			
-			DataService.putData('/api/editBuilding', params)
+			var uri='/api/editBuilding/'+isEdit.idperson;
+			console.log(uri);
+		/*	DataService.putData('/api/editBuilding', params)
 			.success(function(response) {
 				$modalInstance.close(true);
 			}).error(function(err) {
 				$modalInstance.close(false);
-			});
+			});*/
 
 }
 		
@@ -64,12 +82,18 @@ $scope.okay = function() {
 			var params = {
 					
 					//idclient : $rootScope.userId,
-					idclient : 1,
-					start_date:$scope.start_date,
-					release_date : $scope.release_date,
-					buildingname:  $scope.buildingname,
-					address : $scope.address,
-					checkpoint : $scope.checkpoint
+					idperson : isEdit.idperson,
+					fname : isEdit.fname,
+					lname : isEdit.lname,
+					bgstatus : isEdit.bgstatus,
+					weekly_working_set : isEdit.weekly_working_set,
+					start_date : isEdit.start_date,
+					end_date : isEdit.end_date,
+					address : isEdit.address,
+					zipcode : isEdit.zipcode,
+					city : isEdit.city,
+					email : isEdit.fname,
+					phonenumber : isEdit.phonenumber
 						
 				};
 			DataService.postData("/api/createBuilding",params).success(function(response){
