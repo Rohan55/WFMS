@@ -52,7 +52,7 @@ $scope.okay = function() {
 				
 				
 					//idclient : $rootScope.userId,
-			idperson : $scope.idperson,
+			idperson : isEdit.idperson,
 			idguard : $scope.idguard,
 			fname : $scope.fname,
 			lname : $scope.lname,
