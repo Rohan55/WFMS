@@ -1,4 +1,4 @@
-	var crypto = require('crypto');
+var crypto = require('crypto');
 var passport = require('passport');
 var moment = require('moment');
 var dateutil = require('../util/dateutil');
@@ -122,7 +122,10 @@ exports.checkLogin = function(req, res, next) {
 };
 
 exports.logout = function(req, res) {
-    req.logout();
+  console.log("In logout");
+    
+    //req.session.destroy();
+    
     res.send(200);
 };
 

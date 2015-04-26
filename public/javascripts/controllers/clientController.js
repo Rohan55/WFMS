@@ -9,13 +9,35 @@ wfms.controller("ClientController", function($scope, $rootScope,
 	// };
 	$scope.template = "templates/client/clientHome.html";
 
+
 	$scope.setTemplate = function(tabName){
 		$scope.template = "templates/client/"+tabName + ".html";
+	}
+
+	$scope.setTemplateLogout = function(tabName) {
+		$scope.template = "templates/index/"+tabName + ".html";
+
 	}
 
 	$scope.getTemplate = function(){
 		return $scope.template;
 	};
+
+	$scope.logout = function(req,res){
+
+		DataService.getData('/api/logout').success(function(response){
+			if(response.data){
+				$rootScope.idperson == "undefined";
+				$rootScope.idclient == "undefined";
+				$rootScope.idgaurd == "undefined";
+				console.log("I am getting logged out");
+			}else{
+				
+			}
+		}).error(function(err){
+			console.log(err.message);
+		});
+	}
 	// $scope.signInFormError = "";
 
 	// $scope.signIn = function() {

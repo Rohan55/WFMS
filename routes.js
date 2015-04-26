@@ -10,14 +10,14 @@ module.exports = function (app, passport) {
 
     // Home
     app.get('/', function(req,res){ res.render("index"); });
-    app.get(['/home','/logout'], ensureAuthenticated, function(req,res){ res.render("index"); });
+    app.get(['/home','/logout'], ensureAuthenticated, function(req,res){ req.session.destroy();res.render("index"); });
 
     // Auth
     app.post('/api/register', loginController.register);
     app.get('/api/login', function(req,res){ res.render("index"); });
     app.post('/api/login', loginController.checkLogin);
     app.get('/api/loggedin',loginController.loggedin);
-    app.post('/api/logout', loginController.logout);
+    app.get('/api/logout', loginController.logout);
     
     // Client
     app.get('/api/getClient/:idperson', ensureAuthenticated, clientController.getClient);
