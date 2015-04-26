@@ -83,19 +83,19 @@ $scope.okay = function() {
 			var params = {
 					
 					//idclient : $rootScope.userId,
-					idperson : isEdit.idperson,
-					fname : isEdit.fname,
-					lname : isEdit.lname,
-					bgstatus : isEdit.bgstatus,
-					weekly_working_set : isEdit.weekly_working_set,
-					start_date : isEdit.start_date,
-					end_date : isEdit.end_date,
-					address : isEdit.address,
-					zipcode : isEdit.zipcode,
-					city : isEdit.city,
-					email : isEdit.fname,
-					phonenumber : isEdit.phonenumber
-						
+					//idperson : isEdit.idperson,
+					//idguard : $scope.idguard,
+					fname : $scope.fname,
+					lname : $scope.lname,
+					bgstatus : $scope.bgstatus,
+					weekly_working_set : $scope.weekly_working_set,
+					start_date : $scope.start_date,
+					end_date : $scope.end_date,
+					address : $scope.address,
+					zipcode : $scope.zipcode,
+					city : $scope.city,
+					email : $scope.fname,
+					phonenumber : $scope.phonenumber	
 				};
 			DataService.postData("/api/createBuilding",params).success(function(response){
 				$modalInstance.close(true);
