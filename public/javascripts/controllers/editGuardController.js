@@ -1,10 +1,8 @@
 'use strict';
 wfms.controller("EditGuardCtrl", function($scope, $modalInstance,
 		 isEdit, $rootScope, DataService) {
-
 	
-	
-	console.log("isEdit"+isEdit);
+	console.log("isEdit "+isEdit);
 
 	if (isEdit) {
 		$scope.fname = isEdit.fname;

@@ -5,7 +5,12 @@ var crypto = require('crypto');
 
 
 createGuard = function(req,res){
-    //var vpw = req.body.vpw;
+
+	if(!req.body.email ||!req.body.password || !req.body.start_date || !req.body.end_date || !req.body.weekly_working_set || !req.body.bgstatus){
+		res.status(400).json({status : 400, message : "Bad Request"});
+	}
+	else
+		{
     console.log("create guard inside");
     var pwu = req.body.password;
     var un = req.body.email;
@@ -73,6 +78,7 @@ createGuard = function(req,res){
         });
       }
     });
+		}
 };
 
 
