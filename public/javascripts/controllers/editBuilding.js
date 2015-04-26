@@ -4,14 +4,16 @@ wfms.controller("EditBuildingCtrl", function($scope, $modalInstance,
 
 	
 	
-	console.log("isEdit"+isEdit);
+	console.log("isEdit"+ isEdit);
 
 	if (isEdit) {
+		console.log(isEdit.start_date);
 		$scope.buildingname = isEdit.buildingname;
 		$scope.start_date = isEdit.start_date;
 		$scope.release_date = isEdit.release_date;
 		$scope.address = isEdit.address;
 		$scope.checkpoint = isEdit.checkpoint;
+		$scope.no_of_guards = isEdit.no_of_guards;
 		
 	} else {
 		$scope.buildingname ="";
@@ -19,6 +21,7 @@ wfms.controller("EditBuildingCtrl", function($scope, $modalInstance,
 		$scope.release_date="";
 		$scope.address = "";
 		$scope.checkpoint = "";
+		$scope.no_of_guards=""
 	};
 	
 	
@@ -28,11 +31,18 @@ wfms.controller("EditBuildingCtrl", function($scope, $modalInstance,
 
 	    $scope.opened = true;
 	  };
-	
+	  
+	  
+
 
 $scope.okay = function() {
-	if($scope.buildingname && $scope.address && $scope.start_date &&  $scope.releaseDate && $scope.checkpoint){
-		
+	if($scope.buildingname &&
+	$scope.start_date &&
+	$scope.release_date &&
+	$scope.address &&
+	$scope.checkpoint &&
+	$scope.no_of_guards){
+	
 		if (isEdit) {
 			console.log(isEdit);
 
@@ -46,6 +56,7 @@ $scope.okay = function() {
 					release_date : $scope.release_date,
 					buildingname:  $scope.buildingname,
 					address : $scope.address,
+					no_of_guards: $scope.no_of_guards,
 					checkpoint : $scope.checkpoint
 				
 			};
@@ -69,6 +80,7 @@ $scope.okay = function() {
 					release_date : $scope.release_date,
 					buildingname:  $scope.buildingname,
 					address : $scope.address,
+					no_of_guards: $scope.no_of_guards,
 					checkpoint : $scope.checkpoint
 						
 				};
@@ -90,6 +102,7 @@ $scope.okay = function() {
 $scope.cancel = function() {
 	$modalInstance.dismiss(false);
 };
+
 
 });
 

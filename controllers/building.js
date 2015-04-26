@@ -17,6 +17,7 @@ createBuilding = function(req,res){
 				release_date : moment(req.body.release_date,'DD-MM-YYYY').toDate(),
 				address : req.body.address,
 				checkpoint : req.body.checkpoint,
+				no_of_guards: req.body.no_of_guards,
 				buildingstatus:"Active"
 		}
 
@@ -69,10 +70,11 @@ editBuilding = function(req,res){
 	}else{
 		var newParam ={
 				buildingname : req.body.buildingname,
-				start_date : moment(req.body.start_date,'DD-MM-YYYY').toDate(),
-				release_date : moment(req.body.release_date,'DD-MM-YYYY').toDate(),
+				start_date : moment(req.body.start_date,'YYYY-MM-DD').toDate(),
+				release_date : moment(req.body.release_date,'YYYY-MM-DD').toDate(),
 				address : req.body.address,
-				checkpoint : req.body.checkpoint
+				checkpoint : req.body.checkpoint,
+				no_of_guards: req.body.no_of_guards,
 				};
 		//and ?? = ? and ?? = ?
 		//'start_date',old.start_date,'end_date',old.end_date
