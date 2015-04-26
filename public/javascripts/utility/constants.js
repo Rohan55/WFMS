@@ -34,7 +34,8 @@ var urlConstants = {
 	"GET_ALL_GUARDS" : "/api/listAllGuards",
 	"DELETE_GUARD":"/api/deleteGuard",
 	"GET_ACTIVE_ADMIN_ALERTS":"/api/activeAdminAlerts",
-	"DELETE_BUILDING":"/api/deleteBuilding/"
+	"DELETE_BUILDING":"/api/deleteBuilding/",
+	"GET_ALL_CLIENTS":"/api/listAllClients"
 	
 };
 
