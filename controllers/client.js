@@ -110,7 +110,7 @@ deleteClient=function(req,res){
 };
 
 listAllClients=function(req,res){
-	mysql.queryDb('SELECT * FROM client',function(err,rows){
+	mysql.queryDb('SELECT * FROM client left join person on client.idperson = person.idperson',function(err,rows){
 		if (err) {
 			console.log("Error while listing all the client details !!!"  + err);
 			res.status(500).json({ status : 500, message : "Error while listing client details !!!" });
@@ -119,6 +119,7 @@ listAllClients=function(req,res){
 		}
 	});
 };
+
 exports.updateClientBillingInfo = updateClientBillingInfo;
 exports.createClient = createClient;
 exports.updateClient = updateClient;

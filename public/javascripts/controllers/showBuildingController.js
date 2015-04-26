@@ -40,11 +40,11 @@ wfms.controller("ShowBuildingController", function($scope, $rootScope, $modal,
 		
 		DataService.deleteData(uri,[]).success(function(response){
 			alert("Building Deleted Successfully");
-			//this.getBuilding();
+			getBuilding();
 		}).error(function(err){
 			
 		});
-		getBuilding();
+		
 	};
 	
 	

@@ -48,6 +48,7 @@ module.exports = function (app, passport) {
     app.get('/api/alertPerDay/:date', ensureAuthenticated, alertController.alertPerDay);
 
     app.put('/api/alert/seenByClient', ensureAuthenticated, alertController.seenByClient);
+    app.put('/api/alert/seenByAdmin', ensureAuthenticated, alertController.seenByAdmin);
     
    
 

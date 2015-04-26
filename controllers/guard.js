@@ -34,11 +34,11 @@ createGuard = function(req,res){
 
 
 updateGuard = function(req,res){
-	if(!req.body.idperson || !req.body.start_date || !req.body.end_date){
+	if(!req.params.idguard || !req.body.start_date || !req.body.end_date){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{
 		var newParam ={
-			
+				
 				weekly_working_set : req.body.weekly_working_set,
 				bgstatus: req.body.bgstatus,
 				start_date :moment(req.body.start_date,'DD-MM-YYYY').toDate(), 
@@ -53,9 +53,34 @@ updateGuard = function(req,res){
 			if (err) {
 				console.log("Error while perfoming query !!!" + err);
 				res.status(500).json({ status : 500, message : "Please try again later" });
-			} else {
+			} 
+			else
+				{
+				var newParam ={
+						
+						fname : req.body.fname,
+						lname: req.body.lname,
+						address: req.body.address,
+						city: req.body.city,
+						zipcode: req.body.zipcode,
+						email: req.body.email,
+						phonenumber: req.body.phonenumber,
+					};
+			
+				
+				mysql.queryDb("UPDATE person SET ? WHERE ?? = ?", 
+					[newParam,'idperson',req.body.idperson], 
+					function(err, response) {
+					if (err) {
+						console.log("Error while perfoming query !!!" + err);
+						res.status(500).json({ status : 500, message : "Please try again later" });
+					} 
+				else {
+				
 				res.status(200).json({ status : 200, message : "Guard has been updated Succesfully" });
 			}
+			});
+				}
 		});
 	}
 };
