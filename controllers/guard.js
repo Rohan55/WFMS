@@ -34,11 +34,11 @@ createGuard = function(req,res){
 
 
 updateGuard = function(req,res){
-	if(!req.body.idperson || !req.body.start_date || !req.body.end_date){
+	if(!req.params.idguard || !req.body.start_date || !req.body.end_date){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{
 		var newParam ={
-			
+				
 				weekly_working_set : req.body.weekly_working_set,
 				bgstatus: req.body.bgstatus,
 				start_date :moment(req.body.start_date,'DD-MM-YYYY').toDate(), 

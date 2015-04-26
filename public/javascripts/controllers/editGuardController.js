@@ -52,29 +52,30 @@ $scope.okay = function() {
 				
 				
 					//idclient : $rootScope.userId,
-			idperson : isEdit.idperson,
-			fname : isEdit.fname,
-			lname : isEdit.lname,
-			bgstatus : isEdit.bgstatus,
-			weekly_working_set : isEdit.weekly_working_set,
-			start_date : isEdit.start_date,
-			end_date : isEdit.end_date,
-			address : isEdit.address,
-			zipcode : isEdit.zipcode,
-			city : isEdit.city,
-			email : isEdit.fname,
-			phonenumber : isEdit.phonenumber
+			idperson : $scope.idperson,
+			idguard : $scope.idguard,
+			fname : $scope.fname,
+			lname : $scope.lname,
+			bgstatus : $scope.bgstatus,
+			weekly_working_set : $scope.weekly_working_set,
+			start_date : $scope.start_date,
+			end_date : $scope.end_date,
+			address : $scope.address,
+			zipcode : $scope.zipcode,
+			city : $scope.city,
+			email : $scope.fname,
+			phonenumber : $scope.phonenumber
 				
 			};
 			
-			var uri='/api/editBuilding/'+isEdit.idperson;
+			var uri='/api/updateGuard/'+isEdit.idguard;
 			console.log(uri);
-		/*	DataService.putData('/api/editBuilding', params)
+			DataService.putData(uri, params)
 			.success(function(response) {
 				$modalInstance.close(true);
 			}).error(function(err) {
 				$modalInstance.close(false);
-			});*/
+			});
 
 }
 		
