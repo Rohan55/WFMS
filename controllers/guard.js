@@ -16,18 +16,7 @@ createGuard = function(req,res){
     var city = req.body.city;
     var zipcode = req.body.zipcode;
     var phonenumber = req.body.phonenumber;
-
-    req.checkBody('email', 'Please enter a valid email.').notEmpty().isEmail();
-    var errors = req.validationErrors();
-    if (errors) {
-        console.log(errors);
-        var msg = errors[0].msg;
-        res.status(400).json({
-            status : 400,
-            message : msg
-        });
-    }
-    
+     
     var new_salt = Math.round((new Date().valueOf() * Math.random())) + '';
     var pw = crypto.createHmac('sha1', new_salt).update(pwu).digest('hex');
     var created = dateutil.now();
@@ -68,13 +57,14 @@ createGuard = function(req,res){
       				end_date : req.body.end_date,
       				weekly_working_set : req.body.weekly_working_set,
       				bgstatus: req.body.bgstatus
-      		}
+        	  		}
 
       		mysql.queryDb("INSERT INTO guard SET ?", queryParam, function(err, response) {
       			if (err) {
       				console.log("Error while perfoming query !!!");
       				res.status(500).json({ status : 500, message : "Please try again later" });
       			} else {
+      				console.log("success so far");
       				res.status(200).json({ status : 200, message : "Guard has been added Succesfully" });
       			}
       		});
@@ -131,7 +121,8 @@ updateGuard = function(req,res){
 					} 
 				else {
 				
-				res.status(200).json({ status : 200, message : "Guard has been updated Succesfully" });
+					res.status(200).json({ status : 200, message : "Guard has been added Succesfully" });
+					
 			}
 			});
 				}
