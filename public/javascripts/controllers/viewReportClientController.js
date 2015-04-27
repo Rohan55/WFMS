@@ -5,21 +5,16 @@ wfms.controller("viewReportClientController", function($scope, $rootScope,
 	
 	$scope.getdata = function(req,res) {
 		var idperson = 1;
+
 		DataService.getData("/api/listBuilding/"+idperson, []).success(
 				function(response) {
 					angular.toJson(response);
-					//console.log("Response "+ response);
+					//console.log("Response "+ response.data[1].idbuilding);
 					$scope.buildingName = response.data;
+					$scope.selectedbuilding = $scope.data.buildingname;
 				}).error(function(err) {
 			console.log("Error while fetching data");
 		});
-	}
-	
-	$scope.getBuilding = function(req,res){
-
-		//var idperson = $rootScope.idperson;
-
-		
 	}
 
 	$scope.generateReport = function(buildingName){
