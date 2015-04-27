@@ -61,7 +61,7 @@ $scope.okay = function() {
 			address : $scope.address,
 			zipcode : $scope.zipcode,
 			city : $scope.city,
-			email : $scope.fname,
+			email : $scope.email,
 			phonenumber : $scope.phonenumber
 				
 			};
@@ -76,6 +76,7 @@ $scope.okay = function() {
 			});
 
 }
+		
 		
 		else {
 			var params = {
@@ -92,7 +93,7 @@ $scope.okay = function() {
 					address : $scope.address,
 					zipcode : $scope.zipcode,
 					city : $scope.city,
-					email : $scope.fname,
+					email : $scope.email,
 					phonenumber : $scope.phonenumber,
 					password : $scope.city,
 					usertype : "Guard"
