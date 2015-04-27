@@ -1,10 +1,8 @@
 'use strict';
 wfms.controller("EditGuardCtrl", function($scope, $modalInstance,
 		 isEdit, $rootScope, DataService) {
-
 	
-	
-	console.log("isEdit"+isEdit);
+	console.log("isEdit "+isEdit);
 
 	if (isEdit) {
 		$scope.fname = isEdit.fname;
@@ -63,7 +61,7 @@ $scope.okay = function() {
 			address : $scope.address,
 			zipcode : $scope.zipcode,
 			city : $scope.city,
-			email : $scope.fname,
+			email : $scope.email,
 			phonenumber : $scope.phonenumber
 				
 			};
@@ -78,6 +76,7 @@ $scope.okay = function() {
 			});
 
 }
+		
 		
 		else {
 			var params = {
@@ -94,10 +93,12 @@ $scope.okay = function() {
 					address : $scope.address,
 					zipcode : $scope.zipcode,
 					city : $scope.city,
-					email : $scope.fname,
-					phonenumber : $scope.phonenumber	
+					email : $scope.email,
+					phonenumber : $scope.phonenumber,
+					password : $scope.city,
+					usertype : "Guard"
 				};
-			DataService.postData("/api/createBuilding",params).success(function(response){
+			DataService.postData("/api/createGuard",params).success(function(response){
 				$modalInstance.close(true);
 			}).error(function(err){
 				$modalInstance.dismiss(false);
