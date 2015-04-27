@@ -85,11 +85,11 @@ exports.checkLogin = function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
         if (err) {
             console.log(err);
-            res.status(500).json({status:500,message : info.message + "Please try again later"});
+            res.status(500).json({status:500,message : info.message + ".Please try again later"});
         }
         if(!user) {
            console.log(err);
-            res.status(401).json({status:401,message : info.message + "Please try again later"}); 
+            res.status(401).json({status:401,message : info.message + ".Please try again later"}); 
         }
         req.logIn(user, function(err) {
             if (err) {
