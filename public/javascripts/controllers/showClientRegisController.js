@@ -34,9 +34,17 @@ wfms.controller("ShowClientRegisController", function($scope, $rootScope, $modal
 				};
 			DataService.postData("/api/login",params).success(
 				function(response) {
-					console.log("Login Successful");
+					console.log("Login Successful for client");
+					$rootScope.idclient = response.idclient;
+					$rootScope.fname = response.fname;
+					$rootScope.lname = response.lname;
+					console.log("$rootScope.iclient:" + $rootScope.idclient);
+					console.log("$rootScope.fname:" + $rootScope.fname);
+					console.log("$rootScope.lname:" + $rootScope.lname);
+					$location.path('/client');
 				}).error(function(err) {
 			console.log("Error while fetching data");
+			$location.path('/');
 		});
 		}
 	};
