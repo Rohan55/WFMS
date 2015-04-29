@@ -295,6 +295,7 @@ seenByClient = function(req, res) {
 
 };
 
+<<<<<<< HEAD
 alertPerDay = function(req, res) {
 
   console.log("This Api is for creating report based on date");
@@ -319,6 +320,28 @@ alertPerDay = function(req, res) {
           message : "Please try again later"
         });
       } else {
+=======
+seenByAdmin = function(req,res){
+
+	console.log(JSON.stringify(req.body));
+	console.log("This Api will be for changing the status alert when seen by admin");
+	
+	if(!req.body.idalertInfo){
+		res.status(400).json({status : 400, message : "Bad Request"});
+	} else {
+		mysql.queryDb('UPDATE `wfms`.`alertinfo` SET ??= ? WHERE ?? = ?;',['status','T','idalertInfo',req.body.idalertInfo],function(err,result){
+
+			if (err) {
+				res.status(500).json({ status : 500, message : "Error while retrieving data" });
+			} else {
+				res.status(200).json({ status : 200, message : "Alert Updated", result:result});
+			}
+		});
+	}
+
+
+};
+>>>>>>> 9a6eec3ea0414fb7dd94d5fedc049bbbd97f780f
 
         res.status(200).json({
           status : 200,
@@ -355,3 +378,4 @@ exports.alertPerClient = alertPerClient;
 exports.alertPerBuilding = alertPerBuilding;
 exports.createAlert = createAlert;
 exports.activeAdminAlerts = activeAdminAlerts;
+exports.seenByAdmin = seenByAdmin;

@@ -11,6 +11,7 @@ var path = require('path');
 var mysql = require('./models/mysql');
 
 var app = express();
+var renderGUI = express.Router();
 
 app.set('port', process.env.PORT || 3000);
 app.use(cookieParser());
@@ -30,6 +31,18 @@ require('./util/auth')(passport);
 
 //API endpoints
 require('./routes')(app, passport);
+
+renderGUI.get(['/client'], function(req,res){
+	res.render("client");
+});
+
+renderGUI.get(['/admin'], function(req,res){
+	res.render("admin");
+});
+
+renderGUI.get(['/guard'], function(req,res){
+	res.render("guard");
+});
 
 //If request does not map to any route redirect to default route.
 app.get('*', function(req, res){

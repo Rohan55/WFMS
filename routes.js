@@ -1,14 +1,10 @@
 var loginController = require('./controllers/login');
 var clientController = require('./controllers/client');
-//var guardDetails = require('./controllers/guardDetails');
 
 var adminController = require('./controllers/admin');
-
 var reportController = require('./controllers/report');
 var alertController = require('./controllers/alert');
-
 var guardController = require('./controllers/guard');
-
 var buildingController = require('./controllers/building');
 
 
@@ -17,15 +13,16 @@ module.exports = function (app, passport) {
 
     // Home
     app.get('/', function(req,res){ res.render("index"); });
-    app.get(['/home','/logout'], ensureAuthenticated, function(req,res){ res.render("index"); });
-   // app.get('/guard', function(req,res){ res.render("guard"); });
+
+    app.get(['/home','/logout'], ensureAuthenticated, function(req,res){ req.session.destroy();res.render("index"); });
+
 
     // Auth
     app.post('/api/register', loginController.register);
     app.get('/api/login', function(req,res){ res.render("index"); });
     app.post('/api/login', loginController.checkLogin);
     app.get('/api/loggedin',loginController.loggedin);
-    app.post('/api/logout', loginController.logout);
+    app.get('/api/logout', loginController.logout);
     
     // Client
     app.get('/api/getClient/:idperson', ensureAuthenticated, clientController.getClient);
@@ -33,18 +30,21 @@ module.exports = function (app, passport) {
     app.put('/api/updateClient', ensureAuthenticated, clientController.updateClient);
     app.post('/api/createClient', ensureAuthenticated, clientController.createClient);
     app.delete('/api/deleteClient', ensureAuthenticated, clientController.deleteClient);
-    
+    app.post('/api/updateClientBillingInfo', ensureAuthenticated, clientController.updateClientBillingInfo);
 
     // Admin
     //app.post('/api/createAlert' ,adminController.createAlert);
     app.post('/api/publishAlert',adminController.publishAlert);
-   // app.post('/api/addPatrolRecord',guard.addPatrolRecord );
-   // app.put('/api/createReport',reportController.createReport);
+
+    app.post('/api/addPatrolRecord',adminController.addPatrolRecord );
+    //app.put('/api/createReport',reportController.createReport);
+
 
     
     //Rishabh
     app.post('/api/createReport', ensureAuthenticated, reportController.createReport);
     app.get('/api/reportPerBuilding/:idbuilding', ensureAuthenticated, reportController.reportPerBuilding);
+    app.post('/api/reportPerClientPerBuilding/', ensureAuthenticated, reportController.reportPerClientPerBuilding);
     app.get('/api/reportPerClient/:idclient', ensureAuthenticated, reportController.reportPerClient);
     app.get('/api/reportPerDay/:date', ensureAuthenticated, reportController.reportPerDay);
     app.get('/api/reportPerGuard/:idguard', ensureAuthenticated, reportController.reportPerGuard);
@@ -55,14 +55,18 @@ module.exports = function (app, passport) {
     app.get('/api/alertPerDay/:date', ensureAuthenticated, alertController.alertPerDay);
 
     app.put('/api/alert/seenByClient', ensureAuthenticated, alertController.seenByClient);
+    app.put('/api/alert/seenByAdmin', ensureAuthenticated, alertController.seenByAdmin);
     
    
 
     app.get('/api/activeAdminAlerts', ensureAuthenticated, alertController.activeAdminAlerts);
     
+<<<<<<< HEAD
 
 
    
+=======
+>>>>>>> 9a6eec3ea0414fb7dd94d5fedc049bbbd97f780f
 
     
     //Guard
@@ -81,9 +85,14 @@ module.exports = function (app, passport) {
 
     
     //Building
+
+    //app.get(('/api/getBuildingClientReport/:idperson', buildingController.getBuildingClientReport);
+
+    app.get('/api/getBuildingClientReport/:idperson', buildingController.getBuildingClientReport);
+
     app.get('/api/listBuilding/:idperson', buildingController.getBuilding);
     app.post('/api/createBuilding', buildingController.createBuilding);
-    app.put('/api/editBuilding/:buildingid', buildingController.editBuilding);
+    app.put('/api/editBuilding', buildingController.editBuilding);
     app.delete('/api/deleteBuilding/:buildingid', buildingController.deleteBuilding);
 
     
@@ -99,6 +108,12 @@ module.exports = function (app, passport) {
     app.get('/templates/admin/:file',function(req,res){
         var file = req.params.file;
         res.render('templates/admin/' + file);
+    });
+
+    //For Index templates
+    app.get('/templates/index/:file',function(req,res){
+        var file = req.params.file;
+        res.render('templates/index/' + file);
     });
 
     //Auth Middleware

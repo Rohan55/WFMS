@@ -3,7 +3,7 @@
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-table"></i> Table</h3>
+					<h3 class="page-header"><i class="fa fa-table"></i> Alerts</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href ng-click="setTemplate('clientHome')">Home</a></li>
 						<li><i class="fa fa-table"></i>Alert</li>
@@ -26,14 +26,14 @@
                                  <th><i class="icon_cogs"></i> Action</th>
                               </tr>
                               <tr ng-repeat="data in alert">
-                                 <td>{{data.date}}</td>
+                                 <td>{{data.date | date:'yyyy-MM-dd'}}</td>
                                  <td>{{data.time}}</td>
                                  <td>{{data.severity}}</td>
                                  <td>{{data.description}}</td>
                                  <td>
                                   <div class="btn-group">
-                                      <a class="btn btn-success" ng-click = "addList()" href="#"><i class="icon_check_alt2"></i></a>
-                                      <a class="btn btn-danger" ng-model = {{data.idalertInfo}} ng-click = "seen({{data.idalertInfo}})" href="#"><i class="icon_close_alt2"></i></a>
+                                      
+                                      <a class="btn btn-danger" ng-click = "seen(this)" ><i class="icon_close_alt2"></i></a>
                                   </div>
                                   </td>
                               </tr>

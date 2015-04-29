@@ -1,20 +1,11 @@
 'use strict';
-wfms.controller("ViewAllGuardsCtrl", function($scope, $rootScope, DataService) {
+wfms.controller("ViewAllGuardsCtrl", function($scope, $rootScope, $modal, DataService) {
 
-	$scope.getAllGaurds = function(){
-		console.log("function called");
-		var uri = urlConstants.GET_ALL_GUARDS;
+	$scope.getData = function() {
 		
-		DataService.getData(uri,[]).success(function(response){
-			if(response.data){
-				/*console.log(JSON.stringify(response.data));*/
-				$scope.guardListResults = response.data;
-			}
-		}).error(function(err){
-			console.log(err.message);
-		});
+		getAllGaurds();
+		
 	}
-	
 	$scope.deleteCall = function(guard){
 		
 		console.log("to delete"+guard.guard.fname);
@@ -27,8 +18,45 @@ wfms.controller("ViewAllGuardsCtrl", function($scope, $rootScope, DataService) {
 		}).error(function(err){
 			
 		});
-		this.getAllGaurds();
+		getAllGaurds();
 	}
+	
+	$scope.modifyGuard = function(data) {
+		console.log("edit guard");
+
+		var modalInstance = $modal.open({
+			templateUrl : 'templates/admin/editGuard.html',
+			controller : 'EditGuardCtrl',
+			size : 'lg',
+			resolve : {
+				isEdit : function(){
+					return data;
+				}
+		
+			}
+		});
+
+		modalInstance.result.then(function(isValid) {
+			if (isValid) {
+				getAllGaurds();
+			}
+		}, function() {
+		});
+		
+	};
+
+	function getAllGaurds(){
+		var uri = urlConstants.GET_ALL_GUARDS;
+			
+			DataService.getData(uri,[]).success(function(response){
+				if(response.data){
+					/*console.log(JSON.stringify(response.data));*/
+					$scope.guardListResults = response.data;
+				}
+			}).error(function(err){
+				console.log(err.message);
+			});
+		};
 	
 
 });

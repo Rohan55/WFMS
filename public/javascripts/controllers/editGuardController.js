@@ -1,8 +1,36 @@
 'use strict';
-wfms.controller("EditGuardController", function($scope, $modalInstance,$rootScope,DataService,$window) {
+
+wfms.controller("EditGuardCtrl", function($scope, $modalInstance,
+		 isEdit, $rootScope, DataService) {
 	
-	
-	console.log("In edit guard");
+	console.log("isEdit "+isEdit);
+
+	if (isEdit) {
+		$scope.fname = isEdit.fname;
+		$scope.lname = isEdit.lname;
+		$scope.bgstatus = isEdit.bgstatus;
+		$scope.weekly_working_set = isEdit.weekly_working_set;
+		$scope.start_date = isEdit.start_date;
+		$scope.end_date = isEdit.end_date;
+		$scope.address = isEdit.address;
+		$scope.zipcode = isEdit.zipcode;
+		$scope.city = isEdit.city;
+		$scope.email = isEdit.email;
+		$scope.phonenumber = isEdit.phonenumber;
+		
+	} else {
+		$scope.fname = "";
+		$scope.lname = ""
+		$scope.bgstatus = "";
+		$scope.weekly_working_set = "";
+		$scope.start_date = "";
+		$scope.end_date = "";
+		$scope.address = "";
+		$scope.zipcode = "";
+		$scope.city = "";
+		$scope.email = "";
+		$scope.phonenumber = "";
+	};
 
 	
 	
@@ -15,32 +43,88 @@ wfms.controller("EditGuardController", function($scope, $modalInstance,$rootScop
 	
 
 $scope.okay = function() {
-	
+
+	if($scope.start_date && $scope.end_date){
 		
-		
-		
-		var params = {
+		if (isEdit) {
+			console.log(isEdit);
+
+			var params = {
 				
 				
-				idperson : 10,
-				fname : $scope.fname,
-				lname:  $scope.lname,
-				address : $scope.address,
-				city : $scope.city,
-				email :$scope.email,
-				phone : $scope.phone
-					
+					//idclient : $rootScope.userId,
+			idperson : isEdit.idperson,
+			idguard : $scope.idguard,
+			fname : $scope.fname,
+			lname : $scope.lname,
+			bgstatus : $scope.bgstatus,
+			weekly_working_set : $scope.weekly_working_set,
+			start_date : $scope.start_date,
+			end_date : $scope.end_date,
+			address : $scope.address,
+			zipcode : $scope.zipcode,
+			city : $scope.city,
+			email : $scope.email,
+			phonenumber : $scope.phonenumber
+				
 			};
-		DataService.postData("/api/editGuard",params).success(function(response){
-			$modalInstance.close(true);
-		}).error(function(err){
-			$modalInstance.dismiss(false);
-		});
+			
+			var uri='/api/updateGuard/'+isEdit.idguard;
+			console.log(uri);
+			DataService.putData(uri, params)
+			.success(function(response) {
+				$modalInstance.close(true);
+			}).error(function(err) {
+				$modalInstance.close(false);
+			});
+
+}
+		
+		
+		else {
+			var params = {
+					
+					//idclient : $rootScope.userId,
+					//idperson : isEdit.idperson,
+					//idguard : $scope.idguard,
+					fname : $scope.fname,
+					lname : $scope.lname,
+					bgstatus : $scope.bgstatus,
+					weekly_working_set : $scope.weekly_working_set,
+					start_date : $scope.start_date,
+					end_date : $scope.end_date,
+					address : $scope.address,
+					zipcode : $scope.zipcode,
+					city : $scope.city,
+					email : $scope.email,
+					phonenumber : $scope.phonenumber,
+					password : $scope.city,
+					usertype : "Guard"
+				};
+			DataService.postData("/api/createGuard",params).success(function(response){
+				$modalInstance.close(true);
+			}).error(function(err){
+				$modalInstance.dismiss(false);
+			});
+		}
+	}
 	
+	else{
+		
+		$scope.formError = "Form Invalid !!!";
+	}
+
 };
 
 $scope.cancel = function() {
 	$modalInstance.dismiss(false);
 };
+
+
 });
+
+
+
+
+
 

@@ -13,10 +13,12 @@ createBuilding = function(req,res){
 		var queryParam = {
 				idclient : req.body.idclient,
 				buildingname: req.body.buildingname,
-				release_date : req.body.releaseDate,
+				start_date : moment(req.body.start_date,'DD-MM-YYYY').toDate(),
+				release_date : moment(req.body.release_date,'DD-MM-YYYY').toDate(),
 				address : req.body.address,
-				service_fees : req.body.service_fees,
-				checkpoint : req.body.checkpoint
+				checkpoint : req.body.checkpoint,
+				no_of_guards: req.body.no_of_guards,
+				buildingstatus:"Active"
 		}
 
 		mysql.queryDb("INSERT INTO building SET ?", queryParam, function(err, response) {
@@ -30,13 +32,28 @@ createBuilding = function(req,res){
 	}
 };
 
+getBuildingClientReport = function(req,res){
 
+	if(!req.params.idperson){
+		res.status(400).json({ status : 400, message : "Bad Request" });
+	}else{ 
+		mysql.queryDb('SELECT buildingname FROM building WHERE ? and buildingstatus = "Active"',[{idclient:req.params.idperson}],function(err,rows){
+
+			if (err) {
+				res.status(500).json({ status : 500, message : "Error while retrieving data" });
+			} else {
+				res.status(200).json({ status : 200, data : rows });
+			}
+		});
+	}
+
+};
 getBuilding=function(req,res){
 	
 	if(!req.params.idperson){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{ 
-		mysql.queryDb('SELECT * FROM building WHERE ?',[{idclient:req.params.idperson}],function(err,rows){
+		mysql.queryDb('SELECT * FROM building WHERE ? and buildingstatus = "Active"',[{idclient:req.params.idperson}],function(err,rows){
 
 			if (err) {
 				res.status(500).json({ status : 500, message : "Error while retrieving data" });
@@ -48,19 +65,22 @@ getBuilding=function(req,res){
 };
 
 editBuilding = function(req,res){
-	if(!req.params.buildingid){
+	
+	if(!req.body.idbuilding){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{
 		var newParam ={
-				release_date : moment(req.body.release_date,'DD-MM-YYYY').toDate(),
+				buildingname : req.body.buildingname,
+				start_date : moment(req.body.start_date,'YYYY-MM-DD').toDate(),
+				release_date : moment(req.body.release_date,'YYYY-MM-DD').toDate(),
 				address : req.body.address,
-				service_fees : req.body.service_fees,
-				checkpoint : req.body.checkpoint
+				checkpoint : req.body.checkpoint,
+				no_of_guards: req.body.no_of_guards,
 				};
 		//and ?? = ? and ?? = ?
 		//'start_date',old.start_date,'end_date',old.end_date
 		mysql.queryDb("UPDATE building SET ? WHERE ?? = ?", 
-			[newParam,'idbuilding',req.params.buildingid], 
+			[newParam,'idbuilding',req.body.idbuilding], 
 			function(err, response) {
 			if (err) {
 				console.log("Error while perfoming query !!!" + err);
@@ -79,8 +99,10 @@ deleteBuilding=function(req,res){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{
 		var buildingid = req.params.buildingid;
-		
-		mysql.queryDb('DELETE FROM building WHERE ?',[{idbuilding:buildingid}],function(err,response){
+		var newParam ={
+				buildingstatus : "Disable"
+				};
+		mysql.queryDb('UPDATE building SET ? WHERE ?? = ?',[newParam,'idbuilding',req.params.buildingid],function(err,response){
 			if (err) {
 				console.log("Error while deleting building details !!!");
 				console.log(err);
@@ -92,7 +114,7 @@ deleteBuilding=function(req,res){
 	}
 };
 
-
+exports.getBuildingClientReport = getBuildingClientReport;
 exports.getBuilding = getBuilding;
 exports.createBuilding = createBuilding;
 exports.editBuilding = editBuilding;

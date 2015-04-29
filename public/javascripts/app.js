@@ -2,15 +2,19 @@
 var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider.when('/', {
+
 		templateUrl : 'templates/login.ejs',
 		controller : 'LoginController'
+
+
+	}).when('/client', {
+		templateUrl : 'templates/client.ejs',
+		controller : 'ClientController'
 
 	}).when('/guard', {
 		templateUrl : 'templates/guard.ejs',
 		controller : 'GuardController'
-	}).when('/client', {
-		templateUrl : 'templates/client.ejs',
-		controller : 'ClientController'
+	
 		}).when('/admin', {
 
 		templateUrl : 'templates/admin.ejs',
@@ -32,9 +36,9 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap' ])
 
 
 		/*DataService.postData(urlConstants.IS_LOGGED_IN,[]).success(function(response){
-=======
+
 		// DataService.postData(urlConstants.IS_LOGGED_IN,[]).success(function(response){
->>>>>>> c91606129ff8007975f3844a037eff89579a8a14
+
 
 		// 	if($window.sessionStorage.userId){
 		// 		$rootScope.userId = $window.sessionStorage.userId;
