@@ -11,16 +11,18 @@ wfms.controller("viewReportClientController", function($scope, $rootScope,
 					angular.toJson(response);
 					//console.log("Response "+ response.data[1].idbuilding);
 					$scope.buildingName = response.data;
-					$scope.selectedbuilding = $scope.data.buildingname;
+					//$scope.selectedbuilding = $scope.data.buildingname;
 				}).error(function(err) {
 			console.log("Error while fetching data");
 		});
 	}
 
-	$scope.generateReport = function(buildingName){
+	$scope.generateReport = function(){
 
-		angular.toJson(buildingName);
-		console.log("Date :"+ $scope.reportDate);
+		//angular.toJson(buildingName);
+		//console.log("Date :"+ $scope.reportDate);
+		//console.log("buildingname: "+buildingName.buildingname);
+		console.log("BuildingName in generate report"+$scope.selectedbuilding);
 
 				//idclient: $rootScope.idclient;
 			var params = {
