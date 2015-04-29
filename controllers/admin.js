@@ -75,34 +75,8 @@ publishAlert = function(req,res){
 	}
 };*/
 
-addPatrolRecord = function(req,res){
-	console.log(JSON.stringify(req.body));
-	if(!req.body.date || !req.body.description|| !req.body.idgaurd || !req.body.idbuilding || !req.body.idreport){
-		
-		res.status(400).json({status : 400, message : "Bad Request"});
-	}else{
-		
-		var queryParam = {
-				date    : req.body.date,
-				description : req.body.description,
-				idgaurd   : req.body.idgaurd,
-				idbuilding : req.body.idgaurd,
-				idreport : req.body.idreport
-				
-				
-		}
 
-		mysql.queryDb("INSERT INTO patrol SET ?", queryParam, function(err, response) {
-			if (err) {
-				console.log("Error while perfoming query !!!");
-				res.status(500).json({ status : 500, message : "Please try again later" });
-			} else {
-				res.status(200).json({ status : 200, message : "Patrol record has been added Succesfully" });
-			}
-		});
-	}
-};
 
 exports.createAlert=createAlert;
 exports.publishAlert=publishAlert;
-exports.addPatrolRecord=addPatrolRecord;
+

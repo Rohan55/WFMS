@@ -1,12 +1,12 @@
-<div ng-controller="CreateReportCtrl" >
+<div ng-controller="CreatePatrolCtrl" >
 	<section id="main-content">
           <section class="wrapper">            
               
-      <div class="row"><h1>Create report</h1></div>
+      <div class="row"><h1 align="center">       Patrol Details</h1></div>
               <div class="col-md-12 portlets">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <div class="pull-left">Create Alert</div>
+                  <div class="pull-left">   Patrol</div>
                   <div class="widget-icons pull-right">
                     <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a> 
                     <a href="#" class="wclose"><i class="fa fa-times"></i></a>
@@ -20,37 +20,42 @@
                                       <!-- Edit profile form (not working)-->
                                       <form class="form-horizontal">
                                           <!-- Title -->
-                                          <div class="form-group">
-                                           <div class="input-group">
-									       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-									      <input type="date" id="dp-2" ng-model="alert_date" class="form-control" data-date-format="dd-mm-yyyy" data-date-viewmode="years"/>
-								        <!-- <datepicker id="dp-3" ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker> --> 
-								       </div>
-                                          </div>   
+                                         <div class="form-group">
+                                            <label class="control-label col-lg-2" for="tags">Date</label>
+                                             <div class="col-lg-10">
+                                              <input type="date" class="form-control" id="tags" ng-model="date">
+                                            </div> 
+                                            </div>
+                                           
                                           <!-- Content -->
                                           <div class="form-group">
                                             <label class="control-label col-lg-2" for="content">Description</label>
                                             <div class="col-lg-10">
-                                              <textarea class="form-control" id="content"></textarea>
+                                              <textarea class="form-control" id="content" ng-model="desc"></textarea>
                                             </div>
                                           </div>  
+                                          
                                           <div class="form-group">
-                                            <label class="control-label col-lg-2">Alert Type</label>
-                                            <div class="col-lg-10">                               
-                                                <input class="datepicker" data-date-format="mm/dd/yyyy">    
-                                            </div>
-                                          </div>          
+                                          <label class="control-label col-lg-2" for="tags">Time</label>
+                                          <div class="col-md-3">
+								           <div class="input-group bootstrap-timepicker">
+									       <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+									       <input type="time" ng-model="alert_time" class="form-control"/>
+								          </div>
+							              </div>
+							              </div>
+							         
                                                        
                                           <!-- Cateogry -->
                                           <div class="form-group">
-                                            <label class="control-label col-lg-2">Alert Type</label>
+                                            <label class="control-label col-lg-2" for="tags">Checkpoint</label>
                                             <div class="col-lg-10">                               
                                                 <select class="form-control">
                                                   <option value="">- Choose Cateogry -</option>
-                                                  <option value="1">Robbery</option>
-                                                  <option value="2">Maintenance Call</option>
-                                                  <option value="3">Fire</option>
-                                                  <option value="4">Theft</option>
+                                                  <option value="1">Checkpoint 1</option>
+                                                  <option value="2">Checkpoint 2</option>
+                                                  <option value="3">Checkpoint 3</option>
+                                                  <option value="4">Checkpoint 4</option>
                                                 </select>  
                                             </div>
                                           </div>              
@@ -58,7 +63,7 @@
                                           <div class="form-group">
                                             <label class="control-label col-lg-2" for="tags">Building</label>
                                             <div class="col-lg-10">
-                                              <input type="text" class="form-control" id="tags">
+                                              <input type="text" class="form-control" id="tags" ng-model="idbuilding">
                                             </div>
                                           </div>
                                           
@@ -66,7 +71,7 @@
                                           <div class="form-group">
                                              <!-- Buttons -->
                                              <div class="col-lg-offset-2 col-lg-9">
-                                                <button type="submit" class="btn btn-primary">Publish</button>
+                                                <button type="submit" href="setTemplate('patrolAdded')" class="btn btn-primary" ng-click="createPatrol()">Add Patrol Record</button>
                                                 <button type="submit" class="btn btn-danger">Save Draft</button>
                                                 <button type="reset" class="btn btn-default">Reset</button>
                                              </div>

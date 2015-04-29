@@ -13,6 +13,7 @@ createGuard = function(req,res){
 		var toDate = moment(req.body.end_date,'DD-MM-YYYY').toDate();
 
 		var queryParam = {
+				
 				idguard : req.body.idguard,
 				idperson : req.body.idperson,
 				start_date : formDate,
@@ -80,7 +81,7 @@ deleteGuard=function(req,res){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{
 		
-		idguard = req.params.idguard
+		idguard = req.params.idguard;
 		
 		mysql.queryDb('DELETE FROM guard WHERE ?',[{idguard:idguard}],function(err,response){
 			if (err) {
@@ -97,16 +98,17 @@ deleteGuard=function(req,res){
 
 getGuard=function(req,res){
 	
-	if(!req.params.idguard){
+	if(!req.params.idperson){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{ 
 		
-		idguard = req.params.idguard,
-		mysql.queryDb('SELECT * FROM guard g JOIN person p on ?? = ?? where p.idperson =? ;',['g.idperson','p.idperson', 'p.idperson'],function(err,rows){
+		idperson = req.params.idperson,
+		mysql.queryDb('SELECT * FROM guard g JOIN person p on ?? = ?? where ?? =? ;',['g.idperson','p.idperson','p.idperson',req.params.idperson ],function(err,rows){
         
 			if (err) {
 				res.status(500).json({ status : 500, message : "Error while retrieving data" });
 			} else {
+				console.log(rows);
 				res.status(200).json({ status : 200, data : rows });
 			}
 		});
@@ -128,14 +130,89 @@ searchGuard=function(req,res){
 };
 
 
+listAllGuards=function(req,res){
+	mysql.queryDb('select * from guard left join person on guard.idperson = person.idperson',function(err,rows){
+		if (err) {
+			console.log("Error while listing all the guard details !!!"  + err);
+			res.status(500).json({ status : 500, message : "Error while listing guard details !!!" });
+		} else {
+			res.status(200).json({ status : 200, data : rows});
+		}
+	});
+};
+addPatrolRecord = function(req,res){
+	console.log(JSON.stringify(req.body));
+	if(!req.body.date || !req.body.description || !req.body.idguard || !req.body.idbuilding || !req.body.idreport){
+		
+		res.status(400).json({status : 400, message : "Bad Request"});
+	}else{
+		
+		var queryParam = {
+				
+			
+					
+				date    : req.body.date,
+				description : req.body.description,
+				idguard   : req.body.idguard,
+				idbuilding : req.body.idgaurd,
+				idreport : req.body.idreport
+				
+				
+		}
 
+		mysql.queryDb("INSERT INTO patrol SET ?", queryParam, function(err, response) {
+			if (err) {
+				console.log("Error while perfoming query !!!");
+				res.status(500).json({ status : 500, message : "Please try again later" });
+			} else {
+				res.status(200).json({ status : 200, message : "Patrol record has been added Succesfully" });
+			}
+		});
+	}
+};
 	
+getGuardSchedule=function(req,res){
+	
+	
+		
+		idguard = req.params.idguard;
+	mysql.queryDb('select b.buildingname,b.idbuilding,g.from, g.to, b.address from gaurdbuildingschedule g JOIN building b on g.idbuilding=b.idbuilding where ?',[{idguard:idguard}],function(err,rows){
+		if (err) {
+			console.log("Error while fetchung Guard Schedule!!!"  + err);
+			res.status(500).json({ status : 500, message : "Error while listing guard schedule !!!" });
+		} else {
+			res.status(200).json({ status : 200, data : rows});
+		}
+	});
+	
+};
+
+editGuard = function(req,res){
+	if(!req.body.fname || !req.body.lname || !req.body.email || !req.body.phonenumber || !req.body.email){
+		console.log(req.body.fname);
+		res.status(400).json({ status : 400, message : "Bad Request" });
+	}else{
+		
+		
+		mysql.queryDb("UPDATE guard SET ? WHERE ?? = ?", 
+			['idperson',req.body.idperson], 
+			function(err, response) {
+			if (err) {
+				console.log("Error while perfoming query !!!" + err);
+				res.status(500).json({ status : 500, message : "Please try again later" });
+			} else {
+				res.status(200).json({ status : 200, message : "Guard has been updated Succesfully" });
+			}
+		});
+	}
+};
 
 exports.createGuard = createGuard;
 exports.updateGuard=updateGuard;
 exports.listAllGuards=listAllGuards;
 exports.deleteGuard=deleteGuard;
 exports.getGuard = getGuard;
-exports.searchGuard=searchGuard
-
-
+exports.searchGuard=searchGuard;
+exports.addPatrolRecord=addPatrolRecord;
+exports.getGuardSchedule=getGuardSchedule;
+exports.editGuard=editGuard;

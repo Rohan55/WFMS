@@ -7,8 +7,15 @@ var urlConstants = {
 	"IS_LOGGED_IN" : "/api/user/valid",
 	"GET_ALL_USERS" : "/api/user",
 	"LOGOUT" : "/logout",
+	
+	//Guard
 	"GET_GUARD_DETAILS" : "/api/getGuard/",
+	"GET_GUARD_SCHEDULE" : "/api/getGuardSchedule/",
 	"CREATE_ALERT" : "/api/createAlert",
+	"ADD_PATROL" : "/api/addPatrol",
+	"GET_GUARD_BUILDING" : "/api/getGuardSchedule/",
+
+	
 	"GET_EMPLOYMENT_DETAILS":"/api/user/experience/",
 	"GET_SUMMARY":"/api/user/summary/",
 	"GET_EDUCATION_DETAILS":"/api/user/education/",

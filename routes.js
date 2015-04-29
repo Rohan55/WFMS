@@ -11,6 +11,8 @@ var guardController = require('./controllers/guard');
 
 var buildingController = require('./controllers/building');
 
+
+
 module.exports = function (app, passport) {
 
     // Home
@@ -36,8 +38,8 @@ module.exports = function (app, passport) {
     // Admin
     //app.post('/api/createAlert' ,adminController.createAlert);
     app.post('/api/publishAlert',adminController.publishAlert);
-    app.post('/api/addPatrolRecord',adminController.addPatrolRecord );
-    app.put('/api/createReport',reportController.createReport);
+   // app.post('/api/addPatrolRecord',guard.addPatrolRecord );
+   // app.put('/api/createReport',reportController.createReport);
 
     
     //Rishabh
@@ -47,18 +49,18 @@ module.exports = function (app, passport) {
     app.get('/api/reportPerDay/:date', ensureAuthenticated, reportController.reportPerDay);
     app.get('/api/reportPerGuard/:idguard', ensureAuthenticated, reportController.reportPerGuard);
     
-    app.post('/api/createAlert', ensureAuthenticated, alertController.createAlert);
+    app.post('/api/createAlert',  alertController.createAlert);
     app.get('/api/alertPerBuilding/:idbuilding', ensureAuthenticated, alertController.alertPerBuilding);
     app.get('/api/alertPerClient/:idclient', ensureAuthenticated, alertController.alertPerClient);
     app.get('/api/alertPerDay/:date', ensureAuthenticated, alertController.alertPerDay);
-<<<<<<< HEAD
+
     app.put('/api/alert/seenByClient', ensureAuthenticated, alertController.seenByClient);
     
    
-=======
+
     app.get('/api/activeAdminAlerts', ensureAuthenticated, alertController.activeAdminAlerts);
     
->>>>>>> 171855c92b80d7d86cafc2d6ea844cfa2cdb5ada
+
 
    
 
@@ -68,8 +70,11 @@ module.exports = function (app, passport) {
     app.put('/api/updateGuard/:idguard', ensureAuthenticated, guardController.updateGuard);
     app.get('/api/listAllGuards', ensureAuthenticated, guardController.listAllGuards);
     app.delete('/api/deleteGuard/:idguard', ensureAuthenticated, guardController.deleteGuard);
-    app.get('/api/getGuard/:idguard', ensureAuthenticated, guardController.getGuard);
+    app.get('/api/getGuard/:idperson', ensureAuthenticated, guardController.getGuard);
     app.get('/api/searchGuard',ensureAuthenticated, guardController.searchGuard);
+    app.get('/api/getGuardSchedule/:idguard', guardController.getGuardSchedule);
+    app.post('/api/editGuard/:idguard', guardController.editGuard);
+    app.post('/api/addPatrol',guardController.addPatrolRecord);
     
     
   //  api.use('/guardDetails', guardDetails);
